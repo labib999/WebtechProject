@@ -9,6 +9,7 @@ require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/OrganiserController.php';
 require_once '../app/controllers/EventController.php';
 require_once '../app/controllers/TierController.php';
+require_once '../app/controllers/CheckinController.php';
 
 Session::start();
 
@@ -25,21 +26,23 @@ if ($route === '' || $route === 'home') {
 }
 
 $router = new Router();
-$router->add('login',                    'AuthController',      'showLogin');
-$router->add('login-submit',             'AuthController',      'processLogin');
-$router->add('register',                 'AuthController',      'showRegister');
-$router->add('register-submit',          'AuthController',      'processRegister');
-$router->add('logout',                   'AuthController',      'logout');
-$router->add('organiser/dashboard',      'OrganiserController', 'dashboard');
-$router->add('organiser/events',         'EventController',     'index');
-$router->add('organiser/events/create',  'EventController',     'create');
-$router->add('organiser/events/store',   'EventController',     'store');
-$router->add('organiser/events/publish', 'EventController',     'publish');
-$router->add('organiser/events/cancel',  'EventController',     'cancel');
-$router->add('organiser/events/edit',    'EventController',     'edit');
-$router->add('organiser/events/update',  'EventController',     'update');
-$router->add('organiser/tiers',          'TierController',      'index');
-$router->add('organiser/tiers/store',    'TierController',      'store');
-$router->add('organiser/tiers/delete',   'TierController',      'delete');
+$router->add('login',                      'AuthController',      'showLogin');
+$router->add('login-submit',               'AuthController',      'processLogin');
+$router->add('register',                   'AuthController',      'showRegister');
+$router->add('register-submit',            'AuthController',      'processRegister');
+$router->add('logout',                     'AuthController',      'logout');
+$router->add('organiser/dashboard',        'OrganiserController', 'dashboard');
+$router->add('organiser/events',           'EventController',     'index');
+$router->add('organiser/events/create',    'EventController',     'create');
+$router->add('organiser/events/store',     'EventController',     'store');
+$router->add('organiser/events/publish',   'EventController',     'publish');
+$router->add('organiser/events/cancel',    'EventController',     'cancel');
+$router->add('organiser/events/edit',      'EventController',     'edit');
+$router->add('organiser/events/update',    'EventController',     'update');
+$router->add('organiser/tiers',            'TierController',      'index');
+$router->add('organiser/tiers/store',      'TierController',      'store');
+$router->add('organiser/tiers/delete',     'TierController',      'delete');
+$router->add('organiser/checkin',          'CheckinController',   'scanner');
+$router->add('organiser/checkin/process',  'CheckinController',   'process');
 
 $router->dispatch();
