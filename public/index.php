@@ -9,7 +9,7 @@ require_once '../app/core/Controller.php';
 
 // Controllers — we add each one as we build it
 require_once '../app/controllers/AuthController.php';
-// require_once '../app/controllers/OrganiserController.php'; // coming soon
+require_once '../app/controllers/OrganiserController.php'; // coming soon
 
 Session::start();
 
@@ -33,6 +33,6 @@ $router->add('login-submit',    'AuthController', 'processLogin');
 $router->add('register',        'AuthController', 'showRegister');
 $router->add('register-submit', 'AuthController', 'processRegister');
 $router->add('logout',          'AuthController', 'logout');
-// $router->add('organiser/dashboard', 'OrganiserController', 'dashboard');
+$router->add('organiser/dashboard', 'OrganiserController', 'dashboard');
 
 $router->dispatch();
