@@ -1,20 +1,17 @@
 <?php
-// Front Controller — every page request comes through here
-
 require_once '../app/core/Database.php';
 require_once '../app/core/Session.php';
 require_once '../app/core/Auth.php';
 require_once '../app/core/Router.php';
 require_once '../app/core/Controller.php';
 
-// Controllers
 require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/OrganiserController.php';
 require_once '../app/controllers/EventController.php';
+require_once '../app/controllers/TierController.php';
 
 Session::start();
 
-// Temporary home page
 $route = trim($_GET['route'] ?? '', '/');
 if ($route === '' || $route === 'home') {
     try {
@@ -27,7 +24,6 @@ if ($route === '' || $route === 'home') {
     exit;
 }
 
-// Routes
 $router = new Router();
 $router->add('login',                    'AuthController',      'showLogin');
 $router->add('login-submit',             'AuthController',      'processLogin');
@@ -42,5 +38,8 @@ $router->add('organiser/events/publish', 'EventController',     'publish');
 $router->add('organiser/events/cancel',  'EventController',     'cancel');
 $router->add('organiser/events/edit',    'EventController',     'edit');
 $router->add('organiser/events/update',  'EventController',     'update');
+$router->add('organiser/tiers',          'TierController',      'index');
+$router->add('organiser/tiers/store',    'TierController',      'store');
+$router->add('organiser/tiers/delete',   'TierController',      'delete');
 
 $router->dispatch();
