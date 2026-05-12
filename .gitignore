@@ -1,0 +1,14 @@
+# Database config — contains your password, never commit this
+app/config/database.php
+
+# Uploaded files
+public/assets/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+php_errorlog
