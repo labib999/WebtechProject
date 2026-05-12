@@ -10,6 +10,8 @@ require_once '../app/controllers/OrganiserController.php';
 require_once '../app/controllers/EventController.php';
 require_once '../app/controllers/TierController.php';
 require_once '../app/controllers/CheckinController.php';
+require_once '../app/controllers/BookingController.php';
+require_once '../app/controllers/AnalyticsController.php';
 
 Session::start();
 
@@ -44,5 +46,7 @@ $router->add('organiser/tiers/store',      'TierController',      'store');
 $router->add('organiser/tiers/delete',     'TierController',      'delete');
 $router->add('organiser/checkin',          'CheckinController',   'scanner');
 $router->add('organiser/checkin/process',  'CheckinController',   'process');
+$router->add('organiser/bookings',         'BookingController',   'index');
+$router->add('organiser/analytics',        'AnalyticsController', 'index');
 
 $router->dispatch();
