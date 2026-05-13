@@ -169,8 +169,14 @@ function nav($page, $active) {
   <div class="sb-section">Venues</div>
   <a href="/WebtechProject/public/organiser/venues"         class="<?= nav('venues',          $activePage) ?>"><i class="bi bi-building"></i> Browse Venues</a>
   <a href="/WebtechProject/public/organiser/venue-requests" class="<?= nav('venue-requests',  $activePage) ?>"><i class="bi bi-send-fill"></i> My Requests</a>
+<!-- Account -->
+  <div class="sb-section">Account</div>
+  <a href="/WebtechProject/public/organiser/profile" class="<?= nav('profile', $activePage) ?>">
+    <i class="bi bi-person-circle"></i> My Profile
+  </a>
 
   <div class="sb-spacer"></div>
+
   <a href="/WebtechProject/public/logout" class="sb-logout">
     <i class="bi bi-box-arrow-left"></i> Sign out
   </a>
