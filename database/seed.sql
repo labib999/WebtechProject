@@ -170,3 +170,23 @@ INSERT INTO follows (attendee_id, organiser_id) VALUES
 -- Attendees:    attendee1@test.local    /  Attendee@123
 --               (same password for attendee2-5)
 -- ============================================================
+
+-- Additional venues for demo
+INSERT INTO users (name, email, password_hash, phone, role, is_active) VALUES
+('Dhaka Venue Manager',    'vm2@venue.local', '$2b$10$EPSc.7h/UitSeYX3f408/erKsVAYOR1TtOlz/Uz.DyuEQ4U6i/1WO', '01800000003', 'venue_manager', 1),
+('Sylhet Venue Manager',   'vm3@venue.local', '$2b$10$EPSc.7h/UitSeYX3f408/erKsVAYOR1TtOlz/Uz.DyuEQ4U6i/1WO', '01800000004', 'venue_manager', 1),
+('Rajshahi Venue Manager', 'vm4@venue.local', '$2b$10$EPSc.7h/UitSeYX3f408/erKsVAYOR1TtOlz/Uz.DyuEQ4U6i/1WO', '01800000005', 'venue_manager', 1),
+('Khulna Venue Manager',   'vm5@venue.local', '$2b$10$EPSc.7h/UitSeYX3f408/erKsVAYOR1TtOlz/Uz.DyuEQ4U6i/1WO', '01800000006', 'venue_manager', 1);
+
+INSERT INTO venues (manager_id, name, description, address, city, capacity, facilities, is_active) VALUES
+(9,  'Bashundhara Convention City', 'Largest convention facility in Bangladesh.', 'Bashundhara Residential Area, Block-C', 'Dhaka', 2000, '["AV Equipment","Parking","Catering","WiFi","Stage","Air Conditioning","VIP Lounge"]', 1),
+(9,  'InterContinental Dhaka Grand Ballroom', 'Iconic five-star ballroom in the diplomatic zone.', '1 Minto Road, Ramna, Dhaka-1000', 'Dhaka', 700, '["AV Equipment","Fine Dining","WiFi","Stage","VIP Lounge","Air Conditioning"]', 1),
+(9,  'Westin Dhaka Crystal Pavilion', 'Stunning glass-domed pavilion with garden terrace.', 'Gulshan 1, Road 45, Dhaka-1212', 'Dhaka', 400, '["AV Equipment","Catering","WiFi","Stage","Rooftop Terrace","Air Conditioning"]', 1),
+(10, 'Sylhet International Convention Center', 'Modern venue with scenic surroundings.', 'Zindabazar, Sylhet-3100', 'Sylhet', 800, '["AV Equipment","Parking","WiFi","Stage","Air Conditioning"]', 1),
+(10, 'Hotel Noorjahan Grand Sylhet', 'Premium hotel with stunning tea garden views.', 'Dargah Gate, Mazar Road, Sylhet-3100', 'Sylhet', 350, '["AV Equipment","Catering","WiFi","Stage","Air Conditioning","VIP Lounge"]', 1),
+(11, 'Rajshahi Grand Convention Hall', 'Most prestigious convention facility in North Bengal.', '12 Shaheb Bazar Road, Rajshahi-6100', 'Rajshahi', 1200, '["AV Equipment","Parking","Catering","WiFi","Stage","Air Conditioning"]', 1),
+(11, 'Le Méridien Rajshahi Ballroom', 'Five-star luxury ballroom with crystal chandeliers.', 'Rajshahi University Road, Rajshahi-6206', 'Rajshahi', 450, '["AV Equipment","WiFi","Stage","Air Conditioning","VIP Lounge","Fine Dining"]', 1),
+(12, 'Khulna International Convention Center', 'State-of-the-art facility with Rupsha River views.', '45 KDA Avenue, Khulna-9100', 'Khulna', 900, '["AV Equipment","Parking","Catering","WiFi","Stage","Air Conditioning"]', 1),
+(12, 'Sundarban Marriott Banquet Hall', 'Opulent banquet hall with world-class hospitality.', 'Hotel Motel Road, Shiromoni, Khulna-9000', 'Khulna', 350, '["AV Equipment","Catering","WiFi","Air Conditioning","VIP Lounge","Butler Service"]', 1),
+(2,  'Chittagong Port City Grand Hall', 'Majestic waterfront venue overlooking the Bay of Bengal.', 'Patenga Seafront Road, Chattogram-4204', 'Chittagong', 1500, '["AV Equipment","Parking","Catering","WiFi","Stage","Air Conditioning","Sea View"]', 1),
+(2,  'Radisson Blu Chattogram', 'World-renowned luxury brand in Chittagong business district.', 'Plot 4, Nasirabad C/A, CDA Avenue, Chattogram-4000', 'Chittagong', 500, '["AV Equipment","Fine Dining","WiFi","Stage","VIP Lounge","Air Conditioning"]', 1);
