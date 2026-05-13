@@ -53,12 +53,13 @@ include __DIR__ . '/../layouts/organiser-header.php';
       <div class="form-section">
         <div class="form-section-title"><i class="bi bi-person-circle"></i> Personal Information</div>
         <div class="d-flex align-items-center gap-3 mb-3">
-          <?php if (!empty($profile['org_logo_path'])): ?>
-            <img src="/WebtechProject/public/<?= htmlspecialchars($profile['org_logo_path']) ?>"
-                 style="width:80px;height:80px;border-radius:50%;object-fit:cover;" alt="Logo"/>
-          <?php else: ?>
-            <div class="avatar-big"><?= strtoupper(substr($user['name'] ?? 'O', 0, 1)) ?></div>
-          <?php endif; ?>
+<?php if (!empty($profile['org_logo_path'])): ?>
+  <img src="/WebtechProject/public/<?= htmlspecialchars($profile['org_logo_path']) ?>"
+       style="width:80px;height:80px;border-radius:50%;object-fit:cover;
+              border:3px solid #E1F5EE;" alt="Profile"/>
+<?php else: ?>
+  <div class="avatar-big"><?= strtoupper(substr($user['name'] ?? 'O', 0, 1)) ?></div>
+<?php endif; ?>
           <div>
             <div style="font-size:1rem;font-weight:700;"><?= htmlspecialchars($user['name'] ?? '') ?></div>
             <div style="font-size:.8rem;color:#9ca3af;"><?= htmlspecialchars($user['email'] ?? '') ?></div>
