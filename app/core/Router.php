@@ -26,9 +26,9 @@ class Router {
         }
     }
 
-    private function notFound() {
-        http_response_code(404);
-        echo "<h1>404 — Page not found</h1>";
-        echo "<p>The page you are looking for does not exist.</p>";
-    }
+   private function notFound() {
+    http_response_code(404);
+    include __DIR__ . '/../views/errors/404.php';
+}
+
 }
