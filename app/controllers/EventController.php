@@ -7,6 +7,7 @@ class EventController extends Controller {
         $db     = Database::getInstance();
         $orgId  = Auth::userId();
         $filter = $_GET['status'] ?? 'all';
+        $search = trim($_GET['q'] ?? '');
 
         $sql = "SELECT e.*, c.name as category_name,
                        COUNT(DISTINCT b.id) as bookings_count,
@@ -23,6 +24,11 @@ class EventController extends Controller {
             $types  = "is";
         } else {
             $types = "i";
+        }
+        if (!empty($search)) {
+         $sql .= " AND e.title LIKE ?";
+         $params[] = '%' . $search . '%';
+        $types .= "s";
         }
         $sql .= " GROUP BY e.id ORDER BY e.created_at DESC";
 
@@ -41,7 +47,7 @@ class EventController extends Controller {
         $success = Session::getFlash('success');
         $error   = Session::getFlash('error');
         $this->view('organiser/events/list',
-            compact('events','filter','statusCounts','success','error'));
+            compact('events','filter','statusCounts','success','error','search'));
     }
 
     // Show create form
