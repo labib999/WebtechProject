@@ -1,0 +1,188 @@
+/* =====================
+   CSS VARIABLES
+===================== */
+:root {
+    --primary:      #3B82F6;
+    --primary-dark: #1D4ED8;
+    --success:      #10B981;
+    --warning:      #F59E0B;
+    --danger:       #EF4444;
+    --background:   #F8FAFC;
+    --surface:      #FFFFFF;
+    --border:       #E2E8F0;
+    --text-main:    #1E293B;
+    --text-muted:   #64748B;
+    --sidebar-bg:   #1E293B;
+    --sidebar-width: 250px;
+}
+
+/* =====================
+   BASE
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text-main);
+    font-size: 15px;
+}
+
+/* =====================
+   LAYOUT
+===================== */
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    flex: 1;
+}
+
+/* =====================
+   SIDEBAR
+===================== */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.sidebar-brand {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 1rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.15s;
+}
+
+.sidebar-nav a:hover {
+    color: #fff;
+    background-color: rgba(255,255,255,0.08);
+}
+
+.sidebar-nav a.active {
+    color: #fff;
+    background-color: rgba(255,255,255,0.15);
+    border-left: 3px solid var(--primary);
+}
+
+/* =====================
+   STAT CARDS (KPI)
+===================== */
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.stat-card .stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 0.25rem;
+}
+
+/* =====================
+   CARDS
+===================== */
+.card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.card-header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+}
+
+/* =====================
+   BADGES
+===================== */
+.badge-active    { background-color: #D1FAE5; color: #065F46; }
+.badge-pending   { background-color: #FEF3C7; color: #92400E; }
+.badge-cancelled { background-color: #FEE2E2; color: #991B1B; }
+.badge-approved  { background-color: #D1FAE5; color: #065F46; }
+.badge-rejected  { background-color: #FEE2E2; color: #991B1B; }
+.badge-suspended { background-color: #F3F4F6; color: #374151; }
+
+/* =====================
+   TABLES
+===================== */
+.table {
+    font-size: 0.9rem;
+}
+
+.table th {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border);
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+/* =====================
+   UTILITY
+===================== */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+}
