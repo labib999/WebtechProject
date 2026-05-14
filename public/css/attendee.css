@@ -786,3 +786,251 @@ body{
     background: #198754;
     color: white;
 }
+
+
+
+
+
+
+
+
+
+/* MY TICKETS PAGE -----------------------------------------------------------------------------------------*/
+
+.ticket-card{
+    display: grid;
+    grid-template-columns: 1.4fr 1.3fr 1fr;
+    gap: 20px;
+    align-items: center;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #198754;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 18px;
+}
+
+.ticket-card h3{
+    color: #111827;
+    margin: 10px 0;
+    font-size: 22px;
+}
+
+.ticket-card p{
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+.ticket-label{
+    background: #d1fae5;
+    color: #065f46;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ticket-label.completed{
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.past-ticket{
+    border-left-color: #6b7280;
+}
+
+.ticket-actions{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ticket-btn{
+    text-align: center;
+    background: #198754;
+    color: white;
+    text-decoration: none;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.ticket-btn:hover{
+    background: #0f5132;
+}
+
+.ticket-btn.outline{
+    background: white;
+    color: #198754;
+    border: 1px solid #198754;
+}
+
+.ticket-btn.outline:hover{
+    background: #198754;
+    color: white;
+}
+
+.ticket-btn.danger{
+    background: #dc3545;
+}
+
+.ticket-btn.danger:hover{
+    background: #b02a37;
+}
+
+
+
+
+
+
+
+
+/* EVENTS PAGE------------------------------------------------------------------------------------ */
+
+.filter-card{
+    margin-bottom: 30px;
+}
+
+.filter-card h2{
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+.filter-row{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.filter-group label{
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.filter-group input,
+.filter-group select{
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #f9fafb;
+    outline: none;
+}
+
+.filter-group input:focus,
+.filter-group select:focus{
+    border-color: #198754;
+}
+
+.search-event-btn{
+    background: #198754;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-event-btn:hover{
+    background: #0f5132;
+}
+
+.events-page-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.event-list-card{
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.event-list-card:hover{
+    transform: translateY(-5px);
+}
+
+.event-card-image{
+    height: 170px;
+    background: linear-gradient(135deg, #0f5132, #198754);
+}
+
+.music-bg{
+    background: linear-gradient(135deg, #198754, #7c3aed);
+}
+
+.business-bg{
+    background: linear-gradient(135deg, #0f5132, #2563eb);
+}
+
+.sports-bg{
+    background: linear-gradient(135deg, #198754, #f59e0b);
+}
+
+.event-card-body{
+    padding: 22px;
+}
+
+.event-tag{
+    background: #d1fae5;
+    color: #065f46;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.event-card-body h3{
+    margin: 14px 0 10px;
+    color: #111827;
+    font-size: 22px;
+}
+
+.event-card-body p{
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.event-meta{
+    display: flex;
+    justify-content: space-between;
+    color: #374151;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.event-price{
+    color: #0f5132;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.event-actions{
+    display: flex;
+    gap: 12px;
+}
+
+.event-actions .event-btn{
+    flex: 1;
+}
+
+.event-btn.outline{
+    background: white;
+    color: #198754;
+    border: 1px solid #198754;
+}
+
+.event-btn.outline:hover{
+    background: #198754;
+    color: white;
+}
