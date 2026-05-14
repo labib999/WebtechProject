@@ -924,10 +924,6 @@ body{
 }
 
 
-
-
-
-
 /* PRINT TICKET ----------------------------------------------------------------------------*/
 .print-ticket-card{
     background: white;
@@ -993,4 +989,54 @@ body{
 .print-actions button{
     border: none;
     cursor: pointer;
+}
+
+
+
+
+
+/* PROFILE PAGE ----------------------------------------------------------------------------*/
+.profile-grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+}
+
+.profile-card{
+    text-align: center;
+    height: fit-content;
+}
+
+.profile-card img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #198754;
+    margin-bottom: 18px;
+}
+
+.profile-card h2{
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.profile-card p{
+    color: #6b7280;
+    margin-bottom: 14px;
+}
+
+.profile-card span{
+    background: #d1fae5;
+    color: #065f46;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.profile-msg{
+    color: #198754;
+    font-weight: bold;
+    margin-top: 15px;
 }
