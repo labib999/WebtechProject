@@ -108,19 +108,19 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="badge-active px-2 py-1 rounded">🎟️ Attendee</span></td>
+                                    <td><span class="badge-active px-2 py-1 rounded"> Attendee</span></td>
                                     <td>180</td>
                                     <td>175</td>
                                     <td>5</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge-pending px-2 py-1 rounded">🎪 Organiser</span></td>
+                                    <td><span class="badge-pending px-2 py-1 rounded"> Organiser</span></td>
                                     <td>45</td>
                                     <td>40</td>
                                     <td>5</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge-active px-2 py-1 rounded">🏟️ Venue Manager</span></td>
+                                    <td><span class="badge-active px-2 py-1 rounded"> Venue Manager</span></td>
                                     <td>23</td>
                                     <td>20</td>
                                     <td>3</td>
