@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Event Details</title>
-
     <link rel="stylesheet" href="../../public/css/attendee.css">
 </head>
 
@@ -13,7 +12,6 @@
 <div class="main-content">
 
     <!-- Topbar -->
-
     <div class="topbar">
 
         <div class="topbar-left">
@@ -30,16 +28,12 @@
             <div class="user-profile">
 
                 <img src="../../public/uploads/user.png" alt="User">
-
                 <div>
                     <h4>Maruf</h4>
                     <span>Attendee</span>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Event Banner -->
@@ -48,27 +42,20 @@
 
         <div class="banner-overlay">
 
-            <span class="event-category">
-                Technology
-            </span>
+            <span class="event-category">Technology </span>
 
             <h1>AI Conference 2026</h1>
-
             <p>
                 Join the biggest AI conference in Bangladesh with top speakers,
                 startup founders, and technology experts.
             </p>
-
         </div>
-
     </div>
 
     <!-- Event Info -->
-
     <div class="event-details-grid">
 
         <!-- Left Side -->
-
         <div class="event-main-info">
 
             <div class="content-card">
@@ -85,21 +72,15 @@
             </div>
 
             <!-- Ticket Section -->
-
             <div class="content-card">
 
                 <div class="card-header">
 
                     <h2>Ticket Tiers</h2>
-
-                    <a href="checkout.php">
-                        Book Ticket
-                    </a>
-
+                    <a href="checkout.php">Book Ticket </a>
                 </div>
 
                 <table class="data-table">
-
                     <tr>
                         <th>Tier</th>
                         <th>Price</th>
@@ -111,10 +92,7 @@
                         <td>General</td>
                         <td>৳500</td>
                         <td>120 Left</td>
-                        <td>
-                            <a href="checkout.php" class="table-btn">
-                                Book
-                            </a>
+                        <td><a href="checkout.php" class="table-btn">Book</a>
                         </td>
                     </tr>
 
@@ -122,10 +100,7 @@
                         <td>VIP</td>
                         <td>৳1500</td>
                         <td>40 Left</td>
-                        <td>
-                            <a href="checkout.php" class="table-btn">
-                                Book
-                            </a>
+                        <td><a href="checkout.php" class="table-btn">Book</a>
                         </td>
                     </tr>
 
@@ -133,61 +108,36 @@
                         <td>Early Bird</td>
                         <td>৳300</td>
                         <td>Sold Out</td>
-                        <td>
-                            <button class="disabled-btn">
-                                Unavailable
-                            </button>
+                        <td><button class="disabled-btn">Unavailable</button>
                         </td>
                     </tr>
-
                 </table>
-
             </div>
 
             <!-- Reviews -->
-
             <div class="content-card">
 
                 <div class="card-header">
-
                     <h2>Attendee Reviews</h2>
-
-                    <a href="reviews.php">
-                        View All
-                    </a>
-
+                    <a href="reviews.php">View All </a>
                 </div>
 
                 <div class="review-box">
-
                     <h4>Rahim Ahmed</h4>
-
                     <span>★★★★★</span>
-
-                    <p>
-                        Excellent conference with great networking opportunities.
-                    </p>
+                    <p>Excellent conference with great networking opportunities.</p>
 
                 </div>
 
                 <div class="review-box">
-
                     <h4>Nusrat Jahan</h4>
-
                     <span>★★★★☆</span>
-
-                    <p>
-                        Very informative sessions and amazing speakers.
-                    </p>
-
+                    <p> Very informative sessions and amazing speakers.</p>
                 </div>
-
             </div>
-
         </div>
 
         <!-- Right Side -->
-
         <div class="event-sidebar">
 
             <div class="content-card">
@@ -218,33 +168,19 @@
                     <strong>Organiser:</strong>
                     <p>Tech Future Bangladesh</p>
                 </div>
-
             </div>
 
             <!-- Quick Buttons -->
-
             <div class="content-card">
 
                 <h2>Quick Actions</h2>
-
-                <a href="checkout.php" class="quick-btn">
-                    Book Ticket
-                </a>
-
-                <a href="following.php" class="quick-btn">
-                    Follow Organiser
-                </a>
-
-                <a href="complaint.php" class="quick-btn">
-                    Submit Complaint
-                </a>
+                <a href="checkout.php" class="quick-btn">Book Ticket</a>
+                <a href="following.php" class="quick-btn">Follow Organiser</a>
+                <a href="complaint.php" class="quick-btn">Submit Complaint</a>
 
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 </body>
