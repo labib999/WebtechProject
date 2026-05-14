@@ -17,9 +17,9 @@
                 <div class="search-box">
                     <input type="text" placeholder="Search events...">
                 </div>
-                <div class="notification-btn">
+                <!-- <div class="notification-btn">
                     Notifications
-                </div>
+                </div> -->
                 <div class="user-profile">
                     <img src="../../public/uploads/user.png" alt="User">
                     <div>

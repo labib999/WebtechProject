@@ -5,8 +5,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <div class="sidebar">
     <div class="sidebar-logo">
         <img src="../../public/uploads/Logo.png" alt="Logo">
-        <h2>Event Platform</h2>
-        <p>Attendee Panel</p>
+        <h2>Event Management</h2>
+        <p>Attendee</p>
     </div>
 
     <div class="menu-section">
