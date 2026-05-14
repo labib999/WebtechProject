@@ -1,0 +1,59 @@
+/* WELCOME BANNER */
+.welcome-banner {
+    background: linear-gradient(135deg, #1E293B 0%, #0F6E56 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.welcome-date {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.welcome-sub {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.welcome-right {
+    display: flex;
+    gap: 2rem;
+}
+
+.welcome-stat {
+    text-align: center;
+}
+
+.welcome-stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.welcome-stat-label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* STAT CARD ICON */
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
