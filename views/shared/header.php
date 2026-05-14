@@ -9,7 +9,7 @@ session_start();
     <title>EMTS — Event Management & Ticketing System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/emts/public/css/main.css">
+    <link rel="stylesheet" href="/WebtechProject/public/css/main.css">
 </head>
 <body>
 
