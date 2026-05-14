@@ -431,13 +431,6 @@ body{
 
 
 
-
-
-
-
-
-
-
 /* EVENT DETAILS-----------------------------------------------------------------------*/
 
 .event-banner{
@@ -568,6 +561,113 @@ body{
 .review-box p{
     color: #4b5563;
     line-height: 1.7;
+}
+
+
+
+
+
+
+/* CHECKOUT PAGE            ----------------------------------------------------------------*/
+
+.checkout-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+/* Form */
+.form-group{
+    margin-bottom: 22px;
+}
+
+.form-group label{
+    display: block;
+    margin-bottom: 10px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select{
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #f9fafb;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color: #198754;
+}
+
+/* Discount Row */
+.discount-row{
+    display: flex;
+    gap: 10px;
+}
+
+.apply-btn{
+    background: #198754;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.apply-btn:hover{
+    background: #0f5132;
+}
+
+/* Order Summary */
+.order-summary{
+    height: fit-content;
+}
+
+.summary-item{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    color: #374151;
+}
+
+.summary-item.discount strong{
+    color: #dc3545;
+}
+
+.summary-total{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 2px solid #e5e7eb;
+    font-size: 22px;
+    color: #0f5132;
+    font-weight: bold;
+}
+
+/* Confirm Button */
+.confirm-btn{
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    background: #198754;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.confirm-btn:hover{
+    background: #0f5132;
 }
 
 
