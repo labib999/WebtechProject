@@ -23,7 +23,6 @@ body{
     box-shadow: 4px 0px 18px rgba(0,0,0,0.15);
 }
 
-/* Logo */
 .sidebar-logo{
     text-align: center;
     margin-bottom: 35px;
@@ -48,7 +47,6 @@ body{
     letter-spacing: 1px;
 }
 
-/* Menu */
 .menu-section{
     margin-bottom: 25px;
 }
@@ -63,7 +61,6 @@ body{
     padding-left: 10px;
 }
 
-/* Links */
 .sidebar a{
     display: block;
     text-decoration: none;
@@ -82,14 +79,12 @@ body{
     transform: translateX(4px);
 }
 
-/* Active */
 .sidebar .active{
     background: #198754;
     color: white;
     box-shadow: 0 6px 16px rgba(25,135,84,0.35);
 }
 
-/* Logout */
 .logout-link{
     background: rgba(220,53,69,0.18);
     color: #ffd6d6 !important;
@@ -100,8 +95,6 @@ body{
     color: white !important;
 }
 
-/* Main Content */
-
 .main-content{
     margin-left: 260px;
     padding: 30px;
@@ -109,18 +102,7 @@ body{
     min-height: 100vh;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* DASHBOARD ------------------------------------------------------------*/
-
 .dashboard-header{
     display: flex;
     justify-content: space-between;
@@ -323,19 +305,7 @@ body{
     background: #0f5132;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* Header ------------------------------------------------------------*/
-
+/* HEADER ------------------------------------------------------------*/
 .topbar{
     background: white;
     padding: 20px 25px;
@@ -358,14 +328,12 @@ body{
     font-size: 14px;
 }
 
-/* Right Side */
 .topbar-right{
     display: flex;
     align-items: center;
     gap: 18px;
 }
 
-/* Search Box */
 .search-box input{
     width: 260px;
     padding: 12px 15px;
@@ -380,7 +348,6 @@ body{
     border-color: #198754;
 }
 
-/* Notification */
 .notification-btn{
     background: #f1f5f9;
     padding: 12px 18px;
@@ -396,7 +363,6 @@ body{
     color: white;
 }
 
-/* User Profile */
 .user-profile{
     display: flex;
     align-items: center;
@@ -425,14 +391,7 @@ body{
     font-size: 13px;
 }
 
-
-
-
-
-
-
 /* EVENT DETAILS-----------------------------------------------------------------------*/
-
 .event-banner{
     height: 320px;
     border-radius: 18px;
@@ -472,7 +431,6 @@ body{
     line-height: 1.7;
 }
 
-/* Layout */
 .event-details-grid{
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -491,15 +449,11 @@ body{
     gap: 25px;
 }
 
-/* Description */
-
 .event-description{
     line-height: 1.8;
     color: #4b5563;
     margin-top: 15px;
 }
-
-/* Info Box */
 
 .info-item{
     margin-bottom: 20px;
@@ -514,8 +468,6 @@ body{
 .info-item p{
     color: #4b5563;
 }
-
-/* Table Button */
 
 .table-btn{
     background: #198754;
@@ -537,8 +489,6 @@ body{
     border-radius: 8px;
     color: #374151;
 }
-
-/* Reviews */
 
 .review-box{
     padding: 18px;
@@ -563,20 +513,13 @@ body{
     line-height: 1.7;
 }
 
-
-
-
-
-
 /* CHECKOUT PAGE            ----------------------------------------------------------------*/
-
 .checkout-grid{
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 25px;
 }
 
-/* Form */
 .form-group{
     margin-bottom: 22px;
 }
@@ -604,27 +547,6 @@ body{
     border-color: #198754;
 }
 
-/* Discount Row */
-.discount-row{
-    display: flex;
-    gap: 10px;
-}
-
-.apply-btn{
-    background: #198754;
-    color: white;
-    border: none;
-    padding: 0 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.apply-btn:hover{
-    background: #0f5132;
-}
-
-/* Order Summary */
 .order-summary{
     height: fit-content;
 }
@@ -634,10 +556,6 @@ body{
     justify-content: space-between;
     margin-bottom: 18px;
     color: #374151;
-}
-
-.summary-item.discount strong{
-    color: #dc3545;
 }
 
 .summary-total{
@@ -651,7 +569,6 @@ body{
     font-weight: bold;
 }
 
-/* Confirm Button */
 .confirm-btn{
     display: block;
     margin-top: 25px;
@@ -670,11 +587,7 @@ body{
     background: #0f5132;
 }
 
-
-
-
 /* CONFIRMATION  ----------------------------------------------------------------------------*/
-
 .confirmation-card{
     background: white;
     max-width: 780px;
@@ -787,16 +700,7 @@ body{
     color: white;
 }
 
-
-
-
-
-
-
-
-
 /* MY TICKETS PAGE -----------------------------------------------------------------------------------------*/
-
 .ticket-card{
     display: grid;
     grid-template-columns: 1.4fr 1.3fr 1fr;
@@ -871,23 +775,7 @@ body{
     color: white;
 }
 
-.ticket-btn.danger{
-    background: #dc3545;
-}
-
-.ticket-btn.danger:hover{
-    background: #b02a37;
-}
-
-
-
-
-
-
-
-
 /* EVENTS PAGE------------------------------------------------------------------------------------ */
-
 .filter-card{
     margin-bottom: 30px;
 }
@@ -1033,4 +921,76 @@ body{
 .event-btn.outline:hover{
     background: #198754;
     color: white;
+}
+
+
+
+
+
+
+/* PRINT TICKET ----------------------------------------------------------------------------*/
+.print-ticket-card{
+    background: white;
+    max-width: 750px;
+    margin: 20px auto;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+}
+
+.ticket-header{
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.ticket-header h1{
+    color: #0f5132;
+    margin-bottom: 6px;
+}
+
+.ticket-header p{
+    color: #6b7280;
+}
+
+.ticket-code-print{
+    text-align: center;
+    background: #f0fdf4;
+    border: 2px dashed #198754;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+}
+
+.ticket-code-print span{
+    color: #6b7280;
+}
+
+.ticket-code-print h2{
+    color: #0f5132;
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+
+.ticket-info-print{
+    margin-bottom: 25px;
+}
+
+.print-msg{
+    text-align: center;
+    color: #198754;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.print-actions{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.print-actions button{
+    border: none;
+    cursor: pointer;
 }
