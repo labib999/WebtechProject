@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (isset($_SESSION["user_id"])) {
+    header("Location: dashboard.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,33 +22,40 @@
             <p>Create your attendee account</p>
         </div>
 
-        <form>
+        <?php if (isset($_SESSION["error"])) { ?>
+            <p class="error-msg"><?php echo $_SESSION["error"]; ?></p>
+            <?php unset($_SESSION["error"]); ?>
+        <?php } ?>
+
+        <form method="post" action="../../controllers/authController.php">
+            <input type="hidden" name="action" value="register">
+
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your full name">
+                <input type="text" name="name" placeholder="Enter your full name">
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="Enter your email">
+                <input type="email" name="email" placeholder="Enter your email">
             </div>
 
             <div class="form-group">
                 <label>Phone</label>
-                <input type="text" placeholder="Enter your phone number">
+                <input type="text" name="phone" placeholder="Enter your phone number">
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="Create password">
+                <input type="password" name="password" placeholder="Create password">
             </div>
 
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" placeholder="Confirm password">
+                <input type="password" name="confirm_password" placeholder="Confirm password">
             </div>
 
-            <button type="button" onclick="location.href='login.php'" class="auth-btn">Register</button>
+            <button type="submit" class="auth-btn">Register</button>
 
             <p class="auth-link">
                 Already have an account?

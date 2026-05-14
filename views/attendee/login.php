@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION["user_id"])) {
+    header("Location: dashboard.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,18 +21,30 @@
             <p>Login to your attendee account</p>
         </div>
 
-        <form>
+        <?php if (isset($_SESSION["success"])) { ?>
+            <p class="success-msg"><?php echo $_SESSION["success"]; ?></p>
+            <?php unset($_SESSION["success"]); ?>
+        <?php } ?>
+
+        <?php if (isset($_SESSION["error"])) { ?>
+            <p class="error-msg"><?php echo $_SESSION["error"]; ?></p>
+            <?php unset($_SESSION["error"]); ?>
+        <?php } ?>
+
+        <form method="post" action="../../controllers/authController.php">
+            <input type="hidden" name="action" value="login">
+
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="Enter your email">
+                <input type="email" name="email" placeholder="Enter your email">
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="Enter your password">
+                <input type="password" name="password" placeholder="Enter your password">
             </div>
 
-            <button type="button" onclick="location.href='dashboard.php'" class="auth-btn">Login</button>
+            <button type="submit" class="auth-btn">Login</button>
 
             <p class="auth-link">
                 Don't have an account?

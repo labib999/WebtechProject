@@ -1113,3 +1113,25 @@ body{
 .auth-link a:hover{
     text-decoration: underline;
 }
+
+
+/* MESSAGE ---------------------------------------------------------------------------------- */
+.error-msg{
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success-msg{
+    background: #d1fae5;
+    color: #065f46;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
