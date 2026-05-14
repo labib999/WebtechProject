@@ -13,7 +13,7 @@
         <div class="welcome-banner mb-4">
             <div class="welcome-left">
                 <div class="welcome-date"><?= date('l, d F Y') ?></div>
-                <h2 class="welcome-title">Good <?= (date('H') < 12) ? 'Morning' : (date('H') < 17 ? 'Afternoon' : 'Evening') ?>, Admin 👋</h2>
+                <h2 class="welcome-title">Good <?= (date('H') < 12) ? 'Morning' : (date('H') < 17 ? 'Afternoon' : 'Evening') ?>, Labib 👋</h2>
                 <p class="welcome-sub">Here is your platform overview for today.</p>
             </div>
             <div class="welcome-right">
