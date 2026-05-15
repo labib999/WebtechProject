@@ -104,7 +104,7 @@ include '../shared/navbar.php';
 
       <?php if ($req['status'] === 'pending'): ?>
       <div class="d-flex flex-column gap-2" style="min-width:120px;">
-        <form method="POST" action="/WebtechProject/controllers/VenueController.php">
+        <form method="POST" action="/webtechproject/WebtechProject/controllers/VenueController.php">
           <input type="hidden" name="action" value="approve_request">
           <input type="hidden" name="request_id" value="<?= $req['id'] ?>">
           <button type="submit" class="btn btn-success btn-sm w-100"
@@ -131,7 +131,7 @@ include '../shared/navbar.php';
         <h6 class="modal-title fw-semibold">Reject Booking Request</h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <form method="POST" action="/WebtechProject/controllers/VenueController.php">
+      <form method="POST" action="/webtechproject/WebtechProject/controllers/VenueController.php">
         <input type="hidden" name="action" value="reject_request">
         <input type="hidden" name="request_id" id="rejectRequestId">
         <div class="modal-body">

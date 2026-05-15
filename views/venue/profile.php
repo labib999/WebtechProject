@@ -18,6 +18,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $conn = getDB();
 
+        if (!empty($_FILES['profile_pic']['name'])) {
+            $uploadDir = __DIR__ . '/../../public/uploads/profiles/';
+            if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+            $ext     = pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION);
+            $allowed = ['jpg','jpeg','png','webp'];
+            if (in_array(strtolower($ext), $allowed)) {
+                $filename = 'profile_' . $managerId . '.' . $ext;
+                if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $uploadDir . $filename)) {
+                    $s = $conn->prepare("UPDATE users SET profile_pic = ? WHERE id = ?");
+                    $s->bind_param('si', $filename, $managerId);
+                    $s->execute();
+                    $s->close();
+                }
+            }
+        }
+
         if (!empty($new)) {
             if (strlen($new) < 6) {
                 $error = 'New password must be at least 6 characters.';
@@ -57,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $conn = getDB();
-$stmt = $conn->prepare("SELECT name, email, phone, created_at FROM users WHERE id = ?");
+$stmt = $conn->prepare("SELECT name, email, phone, created_at, profile_pic FROM users WHERE id = ?");
 $stmt->bind_param('i', $managerId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -73,9 +89,7 @@ include '../shared/navbar.php';
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h4 class="fw-bold mb-1">My Profile</h4>
-    <p class="text-muted mb-0" style="font-size:14px;">
-      Manage your account information
-    </p>
+    <p class="text-muted mb-0" style="font-size:14px;">Manage your account information</p>
   </div>
 </div>
 
@@ -91,17 +105,34 @@ include '../shared/navbar.php';
 
   <div class="col-md-4">
     <div class="card text-center p-4">
-      <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
-           style="width:80px; height:80px; background:#eff6ff; font-size:32px; color:#3b82f6;">
-        <i class="bi bi-person"></i>
-      </div>
+
+      <?php
+      $picPath = !empty($user['profile_pic'])
+          ? '/webtechproject/WebtechProject/public/uploads/profiles/' . $user['profile_pic']
+          : null;
+      ?>
+
+      <?php if ($picPath): ?>
+        <img src="<?= htmlspecialchars($picPath) ?>"
+             id="profilePreview"
+             class="rounded-circle mx-auto mb-3"
+             style="width:90px; height:90px; object-fit:cover; border:3px solid #eff6ff;">
+      <?php else: ?>
+        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
+             id="profileIcon"
+             style="width:90px; height:90px; background:#eff6ff; font-size:36px; color:#3b82f6;">
+          <i class="bi bi-person"></i>
+        </div>
+      <?php endif; ?>
+
       <h5 class="fw-semibold mb-1"><?= htmlspecialchars($user['name']) ?></h5>
       <p class="text-muted mb-1" style="font-size:13px;"><?= htmlspecialchars($user['email']) ?></p>
       <span class="badge bg-primary">Venue Manager</span>
       <hr>
-      <p class="text-muted mb-0" style="font-size:12px;">
+      <p class="text-muted mb-2" style="font-size:12px;">
         Member since <?= date('M Y', strtotime($user['created_at'])) ?>
       </p>
+
     </div>
   </div>
 
@@ -111,7 +142,19 @@ include '../shared/navbar.php';
         <i class="bi bi-pencil me-2"></i> Edit Profile
       </div>
       <div class="card-body">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
+
+          <div class="mb-3">
+            <label class="form-label">Profile Photo</label>
+            <div class="d-flex align-items-center gap-3">
+              <label class="btn btn-outline-secondary btn-sm" style="cursor:pointer; margin:0;">
+                <i class="bi bi-camera me-1"></i> Upload Photo
+                <input type="file" name="profile_pic" accept="image/*"
+                       style="display:none;" onchange="previewPic(this)">
+              </label>
+              <small class="text-muted">JPG, PNG, WEBP — Max 2MB</small>
+            </div>
+          </div>
 
           <div class="mb-3">
             <label class="form-label">Full Name <span class="text-danger">*</span></label>
@@ -167,5 +210,23 @@ include '../shared/navbar.php';
   </div>
 
 </div>
+
+<script>
+function previewPic(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            let preview = document.getElementById('profilePreview');
+            const icon  = document.getElementById('profileIcon');
+            if (!preview) {
+                if (icon) icon.outerHTML = '<img id="profilePreview" class="rounded-circle mx-auto mb-3" style="width:90px; height:90px; object-fit:cover; border:3px solid #eff6ff;">';
+                preview = document.getElementById('profilePreview');
+            }
+            if (preview) preview.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 
 <?php include '../shared/footer.php'; ?>

@@ -3,7 +3,7 @@ session_start();
 require_once '../models/VenueModel.php';
 
 if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'venue_manager') {
-    header('Location: /WebtechProject/views/shared/login.php');
+    header('Location: /webtechproject/WebtechProject/views/shared/login.php');
     exit;
 }
 
@@ -11,7 +11,7 @@ $action    = $_POST['action'] ?? $_GET['action'] ?? '';
 $model     = new VenueModel();
 $managerId = $_SESSION['user_id'];
 
-if ($action === 'create_venue')    createVenue($model, $managerId);
+if ($action === 'create_venue')       createVenue($model, $managerId);
 elseif ($action === 'update_venue')   updateVenue($model);
 elseif ($action === 'delete_venue')   deleteVenue($model);
 elseif ($action === 'save_pricing')   savePricing($model);
@@ -19,7 +19,7 @@ elseif ($action === 'block_date')     blockDate($model);
 elseif ($action === 'approve_request') approveRequest($model);
 elseif ($action === 'reject_request')  rejectRequest($model);
 else {
-    header('Location: /WebtechProject/views/venue/dashboard.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/dashboard.php');
     exit;
 }
 
@@ -33,7 +33,7 @@ function createVenue($model, $managerId) {
 
     if (empty($name) || empty($address) || empty($city) || $capacity <= 0) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Please fill in all required fields.'];
-        header('Location: /WebtechProject/views/venue/create_venue.php');
+        header('Location: /webtechproject/WebtechProject/views/venue/create_venue.php');
         exit;
     }
 
@@ -42,8 +42,8 @@ function createVenue($model, $managerId) {
         $uploadDir = '../public/uploads/venues/';
         foreach ($_FILES['photos']['tmp_name'] as $i => $tmp) {
             if ($_FILES['photos']['error'][$i] === 0) {
-                $ext      = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
-                $allowed  = ['jpg', 'jpeg', 'png', 'webp'];
+                $ext     = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+                $allowed = ['jpg', 'jpeg', 'png', 'webp'];
                 if (!in_array(strtolower($ext), $allowed)) continue;
                 $filename = 'venue_' . time() . '_' . $i . '.' . $ext;
                 if (move_uploaded_file($tmp, $uploadDir . $filename)) {
@@ -58,10 +58,10 @@ function createVenue($model, $managerId) {
 
     if ($venueId) {
         $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Venue created successfully!'];
-        header('Location: /WebtechProject/views/venue/manage_venues.php');
+        header('Location: /webtechproject/WebtechProject/views/venue/manage_venues.php');
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to create venue. Please try again.'];
-        header('Location: /WebtechProject/views/venue/create_venue.php');
+        header('Location: /webtechproject/WebtechProject/views/venue/create_venue.php');
     }
     exit;
 }
@@ -77,7 +77,7 @@ function updateVenue($model) {
 
     if (empty($name) || empty($address) || empty($city) || $capacity <= 0) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Please fill in all required fields.'];
-        header('Location: /WebtechProject/views/venue/edit_venue.php?id=' . $venueId);
+        header('Location: /webtechproject/WebtechProject/views/venue/edit_venue.php?id=' . $venueId);
         exit;
     }
 
@@ -88,7 +88,7 @@ function updateVenue($model) {
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to update venue.'];
     }
-    header('Location: /WebtechProject/views/venue/manage_venues.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/manage_venues.php');
     exit;
 }
 
@@ -101,7 +101,7 @@ function deleteVenue($model) {
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to delete venue.'];
     }
-    header('Location: /WebtechProject/views/venue/manage_venues.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/manage_venues.php');
     exit;
 }
 
@@ -113,7 +113,7 @@ function savePricing($model) {
 
     if ($venueId <= 0) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Invalid venue.'];
-        header('Location: /WebtechProject/views/venue/pricing.php');
+        header('Location: /webtechproject/WebtechProject/views/venue/pricing.php');
         exit;
     }
 
@@ -124,7 +124,7 @@ function savePricing($model) {
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to save pricing.'];
     }
-    header('Location: /WebtechProject/views/venue/pricing.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/pricing.php');
     exit;
 }
 
@@ -152,7 +152,7 @@ function approveRequest($model) {
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to approve request.'];
     }
-    header('Location: /WebtechProject/views/venue/booking_requests.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/booking_requests.php');
     exit;
 }
 
@@ -162,7 +162,7 @@ function rejectRequest($model) {
 
     if (empty($note)) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Please provide a rejection reason.'];
-        header('Location: /WebtechProject/views/venue/booking_requests.php');
+        header('Location: /webtechproject/WebtechProject/views/venue/booking_requests.php');
         exit;
     }
 
@@ -173,7 +173,7 @@ function rejectRequest($model) {
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Failed to reject request.'];
     }
-    header('Location: /WebtechProject/views/venue/booking_requests.php');
+    header('Location: /webtechproject/WebtechProject/views/venue/booking_requests.php');
     exit;
 }
 ?>

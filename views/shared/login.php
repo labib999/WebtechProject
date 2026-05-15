@@ -1,10 +1,12 @@
 <?php
+session_start();
 require_once '../../config/db.php';
+
+$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
-    $error    = '';
 
     if (empty($email) || empty($password)) {
         $error = 'Email and password are required.';
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_name']  = $user['name'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['role']       = $user['role'];
-            header('Location: /WebtechProject/views/venue/dashboard.php');
+            header('Location: http://localhost/webtechproject/WebtechProject/views/venue/dashboard.php');
             exit;
         }
     }
@@ -81,14 +83,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php endif; ?>
 
       <div class="card p-4">
-        <form method="POST">
+        <form method="POST" autocomplete="off">
 
           <div class="mb-3">
             <label class="form-label">Email Address</label>
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-envelope"></i></span>
               <input type="email" name="email" class="form-control"
-                     placeholder="venue@emts.com"
+                     placeholder="rohit@emts.com"
+                     autocomplete="off"
                      value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
           </div>
@@ -98,7 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-lock"></i></span>
               <input type="password" name="password" id="passwordInput" class="form-control"
-                     placeholder="Enter your password">
+                     placeholder="Enter your password"
+                     autocomplete="new-password">
               <button type="button" class="btn btn-outline-secondary"
                       onclick="togglePassword()">
                 <i class="bi bi-eye" id="eyeIcon"></i>
@@ -128,10 +132,10 @@ function togglePassword() {
     const input = document.getElementById('passwordInput');
     const icon  = document.getElementById('eyeIcon');
     if (input.type === 'password') {
-        input.type  = 'text';
+        input.type     = 'text';
         icon.className = 'bi bi-eye-slash';
     } else {
-        input.type  = 'password';
+        input.type     = 'password';
         icon.className = 'bi bi-eye';
     }
 }

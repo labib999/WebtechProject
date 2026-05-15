@@ -15,7 +15,7 @@ include '../shared/navbar.php';
   </a>
 </div>
 
-<form action="/WebtechProject/controllers/VenueController.php" method="POST" enctype="multipart/form-data">
+<form action="/webtechproject/WebtechProject/controllers/VenueController.php" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="action" value="create_venue">
 
   <div class="card mb-4">
@@ -37,7 +37,12 @@ include '../shared/navbar.php';
           <select name="city" class="form-select" required>
             <option value="">Select city</option>
             <?php
-            $cities = ['Dhaka','Chittagong','Cumilla','Cox\'s Bazar'];
+            $cities = [
+                'Dhaka', 'Chittagong', 'Cumilla', 'Cox\'s Bazar',
+                'Sylhet', 'Rajshahi', 'Khulna', 'Barishal',
+                'Rangpur', 'Mymensingh', 'Jessore', 'Narayanganj',
+                'Gazipur', 'Tangail', 'Bogura'
+            ];
             foreach ($cities as $city):
             ?>
             <option value="<?= $city ?>"

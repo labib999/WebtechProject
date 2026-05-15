@@ -33,57 +33,74 @@ include '../shared/navbar.php';
   </div>
 
 <?php else: ?>
-  <div class="row g-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <?php foreach ($venues as $venue):
       $photos     = json_decode($venue['photos'] ?? '[]', true);
       $facilities = json_decode($venue['facilities'] ?? '[]', true);
-      $photo      = !empty($photos) ? '/WebtechProject/public/uploads/venues/' . $photos[0] : null;
+      $photo      = !empty($photos)
+          ? '/webtechproject/WebtechProject/public/uploads/venues/' . $photos[0]
+          : null;
     ?>
-    <div class="col-md-4">
-      <div class="venue-card">
+    <div class="col">
+      <div class="card h-100 border" style="border-radius:12px; overflow:hidden;">
 
+        <!-- Photo — fixed height same for all -->
         <?php if ($photo): ?>
-          <img src="<?= htmlspecialchars($photo) ?>" class="venue-card-img" alt="<?= htmlspecialchars($venue['name']) ?>">
+          <img src="<?= htmlspecialchars($photo) ?>"
+               alt="<?= htmlspecialchars($venue['name']) ?>"
+               style="width:100%; height:200px; object-fit:cover; object-position:center; display:block;">
         <?php else: ?>
-          <div class="venue-card-img d-flex align-items-center justify-content-center bg-light">
+          <div style="width:100%; height:200px; background:#e2e8f0; display:flex; align-items:center; justify-content:center;">
             <i class="bi bi-building" style="font-size:40px; color:#94a3b8;"></i>
           </div>
         <?php endif; ?>
 
-        <div class="venue-card-body">
-          <h5><?= htmlspecialchars($venue['name']) ?></h5>
-          <p class="text-muted" style="font-size:13px; margin-bottom:10px;">
-            <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($venue['city']) ?> &nbsp;|&nbsp;
+        <!-- Body -->
+        <div class="card-body" style="padding:16px;">
+          <h6 class="fw-bold mb-1" style="font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+            <?= htmlspecialchars($venue['name']) ?>
+          </h6>
+          <p class="text-muted mb-2" style="font-size:12px;">
+            <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($venue['city']) ?>
+            &nbsp;|&nbsp;
             <i class="bi bi-people me-1"></i><?= number_format($venue['capacity']) ?> capacity
           </p>
           <div>
-            <?php foreach (array_slice($facilities, 0, 4) as $f): ?>
-              <span class="facility-tag"><?= htmlspecialchars($f) ?></span>
+            <?php foreach (array_slice($facilities, 0, 3) as $f): ?>
+              <span style="display:inline-block; padding:2px 8px; background:#eff6ff; color:#3b82f6; border-radius:20px; font-size:11px; font-weight:500; margin:2px;">
+                <?= htmlspecialchars($f) ?>
+              </span>
             <?php endforeach; ?>
-            <?php if (count($facilities) > 4): ?>
-              <span class="facility-tag">+<?= count($facilities) - 4 ?> more</span>
+            <?php if (count($facilities) > 3): ?>
+              <span style="display:inline-block; padding:2px 8px; background:#eff6ff; color:#3b82f6; border-radius:20px; font-size:11px; font-weight:500; margin:2px;">
+                +<?= count($facilities) - 3 ?> more
+              </span>
             <?php endif; ?>
           </div>
         </div>
 
-        <div class="venue-card-footer">
-          <a href="calendar.php?venue_id=<?= $venue['id'] ?>"
-             class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-calendar3"></i> Calendar
-          </a>
-          <a href="edit_venue.php?id=<?= $venue['id'] ?>"
-             class="btn btn-primary btn-sm">
-            <i class="bi bi-pen"></i> Edit
-          </a>
-          <form method="POST" action="/WebtechProject/controllers/VenueController.php"
-                style="display:inline;"
-                onsubmit="return confirm('Delete this venue? This cannot be undone.')">
-            <input type="hidden" name="action" value="delete_venue">
-            <input type="hidden" name="venue_id" value="<?= $venue['id'] ?>">
-            <button type="submit" class="btn btn-danger btn-sm">
-              <i class="bi bi-trash"></i>
-            </button>
-          </form>
+        <!-- Footer -->
+        <div class="card-footer bg-white" style="padding:12px 16px; border-top:1px solid #e2e8f0;">
+          <div class="d-flex gap-2">
+            <a href="calendar.php?venue_id=<?= $venue['id'] ?>"
+               class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-calendar3"></i> Calendar
+            </a>
+            <a href="edit_venue.php?id=<?= $venue['id'] ?>"
+               class="btn btn-primary btn-sm">
+              <i class="bi bi-pen"></i> Edit
+            </a>
+            <form method="POST"
+                  action="/webtechproject/WebtechProject/controllers/VenueController.php"
+                  style="display:inline;"
+                  onsubmit="return confirm('Delete this venue?')">
+              <input type="hidden" name="action" value="delete_venue">
+              <input type="hidden" name="venue_id" value="<?= $venue['id'] ?>">
+              <button type="submit" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </div>
         </div>
 
       </div>

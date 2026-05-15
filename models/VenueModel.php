@@ -1,12 +1,12 @@
 <?php
-require_once '../config/db.php';
+require_once __DIR__ . '/../config/db.php';
 
 class VenueModel {
 
     public function createVenue($managerId, $name, $description, $address, $city, $capacity, $facilities, $photos) {
         $conn = getDB();
         $stmt = $conn->prepare("INSERT INTO venues (manager_id, name, description, address, city, capacity, facilities, photos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('issssisss', $managerId, $name, $description, $address, $city, $capacity, $facilities, $photos);
+        $stmt->bind_param('issssiss', $managerId, $name, $description, $address, $city, $capacity, $facilities, $photos);
         $result = $stmt->execute();
         $id = $conn->insert_id;
         $stmt->close();
@@ -41,7 +41,7 @@ class VenueModel {
     public function updateVenue($venueId, $name, $description, $address, $city, $capacity, $facilities) {
         $conn = getDB();
         $stmt = $conn->prepare("UPDATE venues SET name=?, description=?, address=?, city=?, capacity=?, facilities=? WHERE id=?");
-        $stmt->bind_param('ssssissi', $name, $description, $address, $city, $capacity, $facilities, $venueId);
+        $stmt->bind_param('ssssisi', $name, $description, $address, $city, $capacity, $facilities, $venueId);
         $result = $stmt->execute();
         $stmt->close();
         $conn->close();

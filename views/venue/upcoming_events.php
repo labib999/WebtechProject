@@ -19,55 +19,77 @@ include '../shared/navbar.php';
       All approved events scheduled at your venues
     </p>
   </div>
+  <span class="badge bg-primary" style="font-size:13px; padding:8px 14px;">
+    <?= count($events) ?> Events
+  </span>
 </div>
 
 <?php if (empty($events)): ?>
   <div class="card p-5 text-center">
     <i class="bi bi-calendar-x" style="font-size:48px; color:#e2e8f0;"></i>
     <h5 class="mt-3 text-muted">No upcoming events</h5>
-    <p class="text-muted" style="font-size:14px;">
-      Approved events will appear here
-    </p>
+    <p class="text-muted" style="font-size:14px;">Approved events will appear here</p>
   </div>
 
 <?php else: ?>
-  <div class="card">
-    <div class="table-responsive">
-      <table class="table mb-0">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Event</th>
-            <th>Organiser</th>
-            <th>Venue</th>
-            <th>Date & Time</th>
-            <th>Days Left</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($events as $i => $event):
-            $daysLeft = (int)ceil((strtotime($event['event_datetime']) - time()) / 86400);
-          ?>
-          <tr>
-            <td><?= $i + 1 ?></td>
-            <td><strong><?= htmlspecialchars($event['title']) ?></strong></td>
-            <td><?= htmlspecialchars($event['organiser_name']) ?></td>
-            <td><?= htmlspecialchars($event['venue_name']) ?></td>
-            <td><?= date('M d, Y — g:i A', strtotime($event['event_datetime'])) ?></td>
-            <td>
-              <?php if ($daysLeft <= 3): ?>
-                <span class="badge bg-danger"><?= $daysLeft ?> days</span>
-              <?php elseif ($daysLeft <= 7): ?>
-                <span class="badge bg-warning text-dark"><?= $daysLeft ?> days</span>
-              <?php else: ?>
-                <span class="badge bg-success"><?= $daysLeft ?> days</span>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
+  <div class="row g-3">
+    <?php foreach ($events as $i => $event):
+      $daysLeft = (int)ceil((strtotime($event['event_datetime']) - time()) / 86400);
+      $colors   = ['#3b82f6','#10b981','#f59e0b','#8b5cf6','#ef4444','#06b6d4'];
+      $color    = $colors[$i % count($colors)];
+    ?>
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm" style="border-radius:12px; overflow:hidden;">
+        <div style="height:6px; background:<?= $color ?>;"></div>
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:15px;">
+                <?= htmlspecialchars($event['title']) ?>
+              </h6>
+              <p class="text-muted mb-0" style="font-size:12px;">
+                <i class="bi bi-person me-1"></i>
+                <?= htmlspecialchars($event['organiser_name']) ?>
+              </p>
+            </div>
+            <?php if ($daysLeft <= 3): ?>
+              <span class="badge" style="background:#fef2f2; color:#ef4444; font-size:12px; padding:6px 10px;">
+                🔴 <?= $daysLeft ?> days left
+              </span>
+            <?php elseif ($daysLeft <= 7): ?>
+              <span class="badge" style="background:#fffbeb; color:#f59e0b; font-size:12px; padding:6px 10px;">
+                🟡 <?= $daysLeft ?> days left
+              </span>
+            <?php else: ?>
+              <span class="badge" style="background:#ecfdf5; color:#10b981; font-size:12px; padding:6px 10px;">
+                🟢 <?= $daysLeft ?> days left
+              </span>
+            <?php endif; ?>
+          </div>
+
+          <div class="d-flex gap-3" style="font-size:13px; color:#64748b;">
+            <span>
+              <i class="bi bi-building me-1" style="color:<?= $color ?>;"></i>
+              <?= htmlspecialchars($event['venue_name']) ?>
+            </span>
+          </div>
+
+          <hr style="margin:12px 0; border-color:#f1f5f9;">
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div style="font-size:13px;">
+              <i class="bi bi-calendar3 me-1" style="color:<?= $color ?>;"></i>
+              <strong><?= date('M d, Y', strtotime($event['event_datetime'])) ?></strong>
+            </div>
+            <div style="font-size:13px;">
+              <i class="bi bi-clock me-1" style="color:<?= $color ?>;"></i>
+              <?= date('g:i A', strtotime($event['event_datetime'])) ?>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <?php endforeach; ?>
   </div>
 <?php endif; ?>
 

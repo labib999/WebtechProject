@@ -11,63 +11,63 @@
     <ul class="nav nav-pills flex-column gap-1 flex-grow-1">
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/dashboard.php"
+        <a href="/webtechproject/WebtechProject/views/venue/dashboard.php"
            class="nav-link <?= ($activePage ?? '') === 'dashboard' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-house me-2"></i> Dashboard
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/create_venue.php"
+        <a href="/webtechproject/WebtechProject/views/venue/create_venue.php"
            class="nav-link <?= ($activePage ?? '') === 'create_venue' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-plus-circle me-2"></i> Create Venue
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/manage_venues.php"
+        <a href="/webtechproject/WebtechProject/views/venue/manage_venues.php"
            class="nav-link <?= ($activePage ?? '') === 'manage_venues' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-building me-2"></i> My Venues
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/calendar.php"
+        <a href="/webtechproject/WebtechProject/views/venue/calendar.php"
            class="nav-link <?= ($activePage ?? '') === 'calendar' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-calendar3 me-2"></i> Availability Calendar
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/booking_requests.php"
+        <a href="/webtechproject/WebtechProject/views/venue/booking_requests.php"
            class="nav-link <?= ($activePage ?? '') === 'booking_requests' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-inbox me-2"></i> Booking Requests
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/pricing.php"
+        <a href="/webtechproject/WebtechProject/views/venue/pricing.php"
            class="nav-link <?= ($activePage ?? '') === 'pricing' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-tag me-2"></i> Pricing
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/upcoming_events.php"
+        <a href="/webtechproject/WebtechProject/views/venue/upcoming_events.php"
            class="nav-link <?= ($activePage ?? '') === 'upcoming_events' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-calendar-check me-2"></i> Upcoming Events
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/occupancy_report.php"
+        <a href="/webtechproject/WebtechProject/views/venue/occupancy_report.php"
            class="nav-link <?= ($activePage ?? '') === 'occupancy' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-bar-chart me-2"></i> Occupancy Report
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/WebtechProject/views/venue/profile.php"
+        <a href="/webtechproject/WebtechProject/views/venue/profile.php"
            class="nav-link <?= ($activePage ?? '') === 'profile' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-person me-2"></i> My Profile
         </a>
@@ -76,7 +76,7 @@
     </ul>
 
     <div class="mt-auto pt-3 border-top border-secondary">
-      <a href="/WebtechProject/controllers/AuthController.php?action=logout"
+      <a href="/webtechproject/WebtechProject/controllers/AuthController.php?action=logout"
          class="nav-link text-danger">
         <i class="bi bi-box-arrow-right me-2"></i> Logout
       </a>
@@ -85,4 +85,3 @@
   </nav>
 
   <div class="p-4" style="margin-left:250px; width:calc(100% - 250px); min-height:100vh; background-color:#f8fafc;">
-</php>

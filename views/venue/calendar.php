@@ -18,8 +18,9 @@ $availability = $selectedVenueId ? $model->getAvailability($selectedVenueId, $ye
 
 $activePage = 'calendar';
 include '../shared/header.php';
-include '../shared/navbar.php';
 ?>
+<link rel="stylesheet" href="/webtechproject/WebtechProject/public/css/venue.css">
+<?php include '../shared/navbar.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
@@ -43,7 +44,7 @@ include '../shared/navbar.php';
        class="btn btn-outline-secondary btn-sm">
       <i class="bi bi-chevron-left"></i> Prev
     </a>
-    <span class="fw-semibold">
+    <span class="fw-semibold fs-6">
       <?= date('F Y', mktime(0,0,0,$month,1,$year)) ?>
     </span>
     <a href="calendar.php?venue_id=<?= $selectedVenueId ?>&month=<?= $month+1 ?>&year=<?= $year ?>"
@@ -52,15 +53,14 @@ include '../shared/navbar.php';
     </a>
   </div>
 
+  <!-- Day Labels -->
   <div class="calendar-grid">
-    <?php
-    $days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    foreach ($days as $d):
-    ?>
+    <?php foreach (['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] as $d): ?>
       <div class="calendar-day-label"><?= $d ?></div>
     <?php endforeach; ?>
   </div>
 
+  <!-- Days -->
   <div class="calendar-grid" id="calendarGrid">
     <?php
     $firstDay  = (int)date('w', mktime(0,0,0,$month,1,$year));
@@ -73,13 +73,13 @@ include '../shared/navbar.php';
     <?php endfor; ?>
 
     <?php for ($d = 1; $d <= $totalDays; $d++):
-      $dateStr = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-' . str_pad($d, 2, '0', STR_PAD_LEFT);
+      $dateStr = $year.'-'.str_pad($month,2,'0',STR_PAD_LEFT).'-'.str_pad($d,2,'0',STR_PAD_LEFT);
       $status  = $availability[$dateStr]['status'] ?? 'available';
       $note    = $availability[$dateStr]['note']   ?? '';
       $isToday = $dateStr === $today;
     ?>
       <div class="calendar-day <?= $status ?> <?= $isToday ? 'today' : '' ?>"
-           onclick="showDayModal('<?= $dateStr ?>', '<?= $status ?>', '<?= htmlspecialchars($note, ENT_QUOTES) ?>')">
+           onclick="showDayModal('<?= $dateStr ?>','<?= $status ?>','<?= htmlspecialchars($note,ENT_QUOTES) ?>')">
         <div class="day-num"><?= $d ?></div>
         <?php if ($note): ?>
           <div style="font-size:11px; color:#64748b; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
@@ -90,6 +90,7 @@ include '../shared/navbar.php';
     <?php endfor; ?>
   </div>
 
+  <!-- Legend -->
   <div class="p-3 d-flex gap-4" style="border-top:1px solid #e2e8f0; font-size:13px;">
     <span><span class="legend-dot available"></span> Available</span>
     <span><span class="legend-dot booked"></span> Booked</span>
@@ -97,6 +98,7 @@ include '../shared/navbar.php';
   </div>
 </div>
 
+<!-- Block Date -->
 <div class="card mb-4">
   <div class="card-header"><i class="bi bi-ban me-2"></i> Block a Date</div>
   <div class="card-body">
@@ -111,7 +113,7 @@ include '../shared/navbar.php';
                placeholder="e.g. Private booking, Maintenance">
       </div>
       <div class="col-md-2">
-        <button class="btn btn-danger w-100" onclick="blockDate()">
+        <button class="btn btn-danger w-100" onclick="blockDateFn()">
           <i class="bi bi-ban me-1"></i> Block
         </button>
       </div>
@@ -120,6 +122,7 @@ include '../shared/navbar.php';
   </div>
 </div>
 
+<!-- Day Modal -->
 <div class="modal fade" id="dayModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -148,7 +151,7 @@ function showDayModal(date, status, note) {
     new bootstrap.Modal(document.getElementById('dayModal')).show();
 }
 
-function blockDate() {
+function blockDateFn() {
     const date = document.getElementById('blockDate').value;
     const note = document.getElementById('blockNote').value;
     const msg  = document.getElementById('blockMsg');
@@ -165,7 +168,7 @@ function blockDate() {
     formData.append('date',     date);
     formData.append('note',     note);
 
-    fetch('/WebtechProject/controllers/VenueController.php', {
+    fetch('/webtechproject/WebtechProject/controllers/VenueController.php', {
         method: 'POST',
         body:   formData
     })

@@ -31,7 +31,7 @@ include '../shared/navbar.php';
   </select>
 </div>
 
-<form action="/WebtechProject/controllers/VenueController.php" method="POST">
+<form action="/webtechproject/WebtechProject/controllers/VenueController.php" method="POST">
   <input type="hidden" name="action" value="save_pricing">
   <input type="hidden" name="venue_id" value="<?= $selectedVenueId ?>">
 
