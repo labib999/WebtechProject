@@ -73,6 +73,7 @@
                             <th>Date</th>
                             <th>Tickets Sold</th>
                             <th>Status</th>
+                            <th>Featured</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -87,6 +88,11 @@
                             <td>20 May 2026</td>
                             <td>142</td>
                             <td><span class="badge-active px-2 py-1 rounded">Published</span></td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-outline-danger" onclick="confirmCancel()">
                                     <i class="bi bi-x-circle"></i> Cancel
@@ -104,6 +110,11 @@
                             <td>89</td>
                             <td><span class="badge-active px-2 py-1 rounded">Published</span></td>
                             <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                            </td>
+                            <td>
                                 <button class="btn btn-sm btn-outline-danger" onclick="confirmCancel()">
                                     <i class="bi bi-x-circle"></i> Cancel
                                 </button>
@@ -120,6 +131,11 @@
                             <td>0</td>
                             <td><span class="badge-pending px-2 py-1 rounded">Draft</span></td>
                             <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                            </td>
+                            <td>
                                 <button class="btn btn-sm btn-outline-danger" onclick="confirmCancel()">
                                     <i class="bi bi-x-circle"></i> Cancel
                                 </button>
@@ -135,6 +151,11 @@
                             <td>10 Apr 2026</td>
                             <td>210</td>
                             <td><span class="badge-suspended px-2 py-1 rounded">Completed</span></td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" checked disabled>
+                                </div>
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-outline-danger" disabled>
                                     <i class="bi bi-x-circle"></i> Cancel

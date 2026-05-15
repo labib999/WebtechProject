@@ -251,6 +251,31 @@
                     </div>
                 </div>
             </div>
+                        <!-- PLATFORM SETTINGS -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <i class="bi bi-gear me-2"></i>Platform Commission Settings
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-end g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Default Commission Rate (%)</label>
+                            <input type="number" class="form-control" value="10" min="0" max="100">
+                            <div class="text-muted mt-1" style="font-size:0.8rem;">Applied to all ticket sales platform-wide</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Max Featured Events</label>
+                            <input type="number" class="form-control" value="5" min="1" max="10">
+                            <div class="text-muted mt-1" style="font-size:0.8rem;">Maximum events allowed on homepage</div>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary w-100">
+                                <i class="bi bi-save me-1"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
