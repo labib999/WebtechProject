@@ -1,0 +1,189 @@
+.venue-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow 0.2s;
+}
+
+.venue-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.venue-card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #e2e8f0;
+}
+
+.venue-card-body {
+    padding: 16px;
+}
+
+.venue-card-body h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.venue-card-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 8px;
+}
+
+.facility-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #eff6ff;
+    color: #3b82f6;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 2px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day-label {
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.calendar-day {
+    border: 1px solid #e2e8f0;
+    min-height: 80px;
+    padding: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+}
+
+.calendar-day:hover  { background: #f1f5f9; }
+.calendar-day.empty  { background: #f8fafc; cursor: default; }
+.calendar-day.available { background: #ecfdf5; }
+.calendar-day.booked    { background: #eff6ff; }
+.calendar-day.blocked   { background: #fef2f2; }
+
+.calendar-day .day-num {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.calendar-day.today .day-num {
+    background: #3b82f6;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.legend-dot.available { background: #10b981; }
+.legend-dot.booked    { background: #3b82f6; }
+.legend-dot.blocked   { background: #ef4444; }
+
+.pricing-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.pricing-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.request-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.date-chip {
+    display: inline-block;
+    background: #eff6ff;
+    color: #3b82f6;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 2px;
+}
+
+.report-metric {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.report-metric .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.report-metric .label {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.photo-slot {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px dashed #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-slot:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
