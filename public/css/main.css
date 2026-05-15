@@ -1,188 +1,101 @@
-/* =====================
-   CSS VARIABLES
-===================== */
-:root {
-    --primary:      #3B82F6;
-    --primary-dark: #1D4ED8;
-    --success:      #10B981;
-    --warning:      #F59E0B;
-    --danger:       #EF4444;
-    --background:   #F8FAFC;
-    --surface:      #FFFFFF;
-    --border:       #E2E8F0;
-    --text-main:    #1E293B;
-    --text-muted:   #64748B;
-    --sidebar-bg:   #1E293B;
-    --sidebar-width: 250px;
-}
-
-/* =====================
-   BASE
-===================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--background);
-    color: var(--text-main);
-    font-size: 15px;
+    background-color: #f8fafc;
+    color: #1e293b;
 }
 
-/* =====================
-   LAYOUT
-===================== */
-.wrapper {
-    display: flex;
-    min-height: 100vh;
-}
-
-.main-content {
-    margin-left: var(--sidebar-width);
-    padding: 2rem;
-    flex: 1;
-}
-
-/* =====================
-   SIDEBAR
-===================== */
-.sidebar {
-    width: var(--sidebar-width);
-    background-color: var(--sidebar-bg);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    padding: 1.5rem 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-.sidebar-brand {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 0 1.5rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 1rem;
-}
-
-.sidebar-nav a {
-    display: block;
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    padding: 0.65rem 1.5rem;
-    font-size: 0.9rem;
+.sidebar .nav-link {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
     font-weight: 500;
-    transition: all 0.15s;
+    transition: background 0.2s, color 0.2s;
 }
 
-.sidebar-nav a:hover {
-    color: #fff;
-    background-color: rgba(255,255,255,0.08);
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff !important;
 }
 
-.sidebar-nav a.active {
-    color: #fff;
-    background-color: rgba(255,255,255,0.15);
-    border-left: 3px solid var(--primary);
+.sidebar .nav-link.active {
+    background-color: #3b82f6;
+    color: #fff !important;
 }
 
-/* =====================
-   STAT CARDS (KPI)
-===================== */
 .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: #fff;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: box-shadow 0.2s;
 }
 
-.stat-card .stat-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.stat-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
 }
 
-.stat-card .stat-number {
-    font-size: 2rem;
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.stat-icon.blue   { background: #eff6ff; color: #3b82f6; }
+.stat-icon.green  { background: #ecfdf5; color: #10b981; }
+.stat-icon.yellow { background: #fffbeb; color: #f59e0b; }
+.stat-icon.red    { background: #fef2f2; color: #ef4444; }
+
+.stat-info h3 {
+    font-size: 26px;
     font-weight: 700;
-    color: var(--text-main);
-    margin-top: 0.25rem;
+    margin: 0;
+    line-height: 1;
 }
 
-/* =====================
-   CARDS
-===================== */
+.stat-info p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 4px 0 0;
+}
+
 .card {
-    border: 1px solid var(--border);
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    background: #fff;
 }
 
 .card-header {
-    background-color: var(--surface);
-    border-bottom: 1px solid var(--border);
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 16px 20px;
     font-weight: 600;
-    padding: 1rem 1.25rem;
+    font-size: 15px;
 }
 
-/* =====================
-   BADGES
-===================== */
-.badge-active    { background-color: #D1FAE5; color: #065F46; }
-.badge-pending   { background-color: #FEF3C7; color: #92400E; }
-.badge-cancelled { background-color: #FEE2E2; color: #991B1B; }
-.badge-approved  { background-color: #D1FAE5; color: #065F46; }
-.badge-rejected  { background-color: #FEE2E2; color: #991B1B; }
-.badge-suspended { background-color: #F3F4F6; color: #374151; }
-
-/* =====================
-   TABLES
-===================== */
-.table {
-    font-size: 0.9rem;
-}
-
-.table th {
-    font-size: 0.78rem;
-    font-weight: 700;
+.table thead th {
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border);
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 16px;
 }
 
-/* =====================
-   BUTTONS
-===================== */
-.btn-primary {
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
-
-/* =====================
-   UTILITY
-===================== */
-.text-muted {
-    color: var(--text-muted) !important;
-}
-
-.page-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 1.5rem;
+.table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
 }
