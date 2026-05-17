@@ -127,8 +127,15 @@ include __DIR__ . '/../layouts/organiser-header.php';
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">New Password</label>
-            <input type="password" name="new_password" class="form-control"
-                   placeholder="Min 8 characters"/>
+            <input type="password" name="new_password" id="newPassword"
+       class="form-control" placeholder="Min 8 characters"
+       oninput="checkStrength(this.value)"/>
+<div style="margin-top:.4rem;">
+  <div style="height:4px;background:#f3f4f6;border-radius:2px;overflow:hidden;">
+    <div id="strengthBar" style="height:100%;width:0%;border-radius:2px;transition:all .3s;"></div>
+  </div>
+  <div id="strengthText" style="font-size:.72rem;margin-top:.25rem;color:#9ca3af;"></div>
+</div>
           </div>
           <div class="col-md-6">
             <label class="form-label">Confirm New Password</label>
@@ -155,5 +162,29 @@ include __DIR__ . '/../layouts/organiser-header.php';
     </div>
   </div>
 </form>
+
+<script>
+function checkStrength(val) {
+  const bar  = document.getElementById('strengthBar');
+  const text = document.getElementById('strengthText');
+  if (!val) { bar.style.width='0%'; text.textContent=''; return; }
+  let score = 0;
+  if (val.length >= 8)          score++;
+  if (/[A-Z]/.test(val))        score++;
+  if (/[0-9]/.test(val))        score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+  const levels = [
+    {w:'25%', c:'#ef4444', t:'Weak'},
+    {w:'50%', c:'#d97706', t:'Fair'},
+    {w:'75%', c:'#3b82f6', t:'Good'},
+    {w:'100%',c:'#0F6E56', t:'Strong'}
+  ];
+  const l = levels[score-1] || levels[0];
+  bar.style.width = l.w;
+  bar.style.background = l.c;
+  text.style.color = l.c;
+  text.textContent = l.t;
+}
+</script>
 
 <?php include __DIR__ . '/../layouts/organiser-footer.php'; ?>
