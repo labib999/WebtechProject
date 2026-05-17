@@ -2,10 +2,12 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" href="../../public/css/attendee.css">
 </head>
+
 <body>
     <?php include("sidebar.php"); ?>
     <div class="main-content">
@@ -25,7 +27,8 @@
                 <div class="user-profile">
                     <img src="../../public/uploads/user.png" alt="User">
                     <div>
-                        <h4>Maruf</h4>
+                        <h4><?php echo $_SESSION["name"]; ?></h4>
+                        <span><?php echo $_SESSION["role"]; ?></span>
                         <span>Attendee</span>
                     </div>
                 </div>
@@ -132,4 +135,5 @@
         </div>
     </div>
 </body>
+
 </html>
