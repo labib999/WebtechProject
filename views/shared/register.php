@@ -60,12 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <div class="card p-4">
-      <form method="POST">
+      <form method="POST" autocomplete="off">
 
         <div class="mb-3">
-          <label class="form-label fw-500">Full Name</label>
+          <label class="form-label">Full Name</label>
           <input type="text" name="name" class="form-control"
                  placeholder="Enter your full name"
+                 autocomplete="off"
                  value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
         </div>
 
@@ -73,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label class="form-label">Email Address</label>
           <input type="email" name="email" class="form-control"
                  placeholder="Enter your email"
+                 autocomplete="off"
                  value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
         </div>
 
@@ -80,19 +82,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label class="form-label">Phone Number</label>
           <input type="text" name="phone" class="form-control"
                  placeholder="e.g. 01711000000"
+                 autocomplete="off"
                  value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
         </div>
 
         <div class="mb-3">
           <label class="form-label">Password</label>
           <input type="password" name="password" class="form-control"
-                 placeholder="Minimum 6 characters">
+                 placeholder="Minimum 6 characters"
+                 autocomplete="new-password">
         </div>
 
         <div class="mb-4">
           <label class="form-label">Confirm Password</label>
           <input type="password" name="confirm" class="form-control"
-                 placeholder="Re-enter your password">
+                 placeholder="Re-enter your password"
+                 autocomplete="new-password">
         </div>
 
         <button type="submit" class="btn btn-primary w-100">

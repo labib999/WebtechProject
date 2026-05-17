@@ -187,5 +187,50 @@ class VenueModel {
         $conn->close();
         return $report;
     }
+
+    public function getBookingHistory($managerId) {
+        $conn = getDB();
+        $stmt = $conn->prepare("
+            SELECT e.title, e.event_datetime, u.name as organiser_name,
+                   v.name as venue_name, b.quantity as tickets_sold,
+                   b.checked_in, b.total_price
+            FROM events e
+            JOIN venues v ON e.venue_id = v.id
+            JOIN users u ON e.organiser_id = u.id
+            LEFT JOIN bookings b ON b.event_id = e.id
+            WHERE v.manager_id = ?
+            AND e.event_datetime < NOW()
+            ORDER BY e.event_datetime DESC
+        ");
+        $stmt->bind_param('i', $managerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $history = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        $conn->close();
+        return $history;
+    }
+
+    public function getRepeatOrganisers($managerId) {
+        $conn = getDB();
+        $stmt = $conn->prepare("
+            SELECT u.name as organiser_name, u.email,
+                   COUNT(vbr.id) as booking_count,
+                   MAX(vbr.submitted_at) as last_booking
+            FROM venue_booking_requests vbr
+            JOIN venues v ON vbr.venue_id = v.id
+            JOIN users u ON vbr.organiser_id = u.id
+            WHERE v.manager_id = ? AND vbr.status = 'approved'
+            GROUP BY u.id, u.name, u.email
+            ORDER BY booking_count DESC
+        ");
+        $stmt->bind_param('i', $managerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $organisers = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        $conn->close();
+        return $organisers;
+    }
 }
 ?>

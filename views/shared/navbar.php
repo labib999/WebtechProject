@@ -67,6 +67,20 @@
       </li>
 
       <li class="nav-item">
+        <a href="/webtechproject/WebtechProject/views/venue/booking_history.php"
+           class="nav-link <?= ($activePage ?? '') === 'booking_history' ? 'active' : 'text-secondary' ?>">
+          <i class="bi bi-clock-history me-2"></i> Booking History
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/webtechproject/WebtechProject/views/venue/repeat_organisers.php"
+           class="nav-link <?= ($activePage ?? '') === 'repeat_organisers' ? 'active' : 'text-secondary' ?>">
+          <i class="bi bi-people me-2"></i> Organiser List
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a href="/webtechproject/WebtechProject/views/venue/profile.php"
            class="nav-link <?= ($activePage ?? '') === 'profile' ? 'active' : 'text-secondary' ?>">
           <i class="bi bi-person me-2"></i> My Profile
