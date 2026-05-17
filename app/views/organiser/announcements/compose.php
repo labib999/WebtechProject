@@ -85,8 +85,12 @@ include __DIR__ . '/../../layouts/organiser-header.php';
           </div>
           <div class="mb-4">
             <label class="form-label">Message <span style="color:#ef4444;">*</span></label>
-            <textarea name="body" class="form-control"
-                      placeholder="Write your message to all ticket holders..." required></textarea>
+           <textarea name="body" id="announcementBody" class="form-control"
+          placeholder="Write your message to all ticket holders..."
+          maxlength="500" oninput="updateCharCount()" required></textarea>
+<div style="font-size:.74rem;color:#9ca3af;text-align:right;margin-top:.3rem;">
+  <span id="charCount">0</span>/500 characters
+</div>
           </div>
           <button type="submit" class="btn-send"
                   onclick="return confirm('Send this announcement to all ticket holders?')">
@@ -130,5 +134,14 @@ include __DIR__ . '/../../layouts/organiser-header.php';
     </div>
   </div>
 </div>
+
+<script>
+function updateCharCount() {
+  const len = document.getElementById('announcementBody').value.length;
+  const el  = document.getElementById('charCount');
+  el.textContent = len;
+  el.style.color = len > 450 ? '#ef4444' : '#9ca3af';
+}
+</script>
 
 <?php include __DIR__ . '/../../layouts/organiser-footer.php'; ?>
