@@ -539,24 +539,32 @@ document.addEventListener('DOMContentLoaded',function(){
         const orig=btn.innerHTML;
         btn.disabled=true;
         btn.innerHTML='<span class="spinner-border spinner-border-sm me-2"></span>Please wait...';
-        setTimeout(()=>{btn.disabled=false;btn.innerHTML=orig;},5000);
+setTimeout(()=>{btn.disabled=false;btn.innerHTML=orig;},5000);
       }
     });
   });
 });
+</script>
+<style>
 /* ═══════════════════════════════════════
    GLOBAL PAGE IMPROVEMENTS
-═══════════════════════════════════════ */
-
+*/
 body {
   background:#e8edf3;
   background-image:radial-gradient(#c8d0db 1px, transparent 1px);
   background-size:24px 24px;
 }
-[data-bs-theme="dark"] body {
-  background:#0d1117!important;
-  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px)!important;
-  background-size:24px 24px!important;
+[data-bs-theme="dark"] {
+  --surface:#1f2937;
+  --bg:#0e1117;
+  --border:rgba(255,255,255,.1);
+  --gray900:#f1f5f9;
+  --gray800:#e2e8f0;
+  --gray500:#94a3b8;
+  --gray100:#1e2a3a;
+  --gray50:#111827;
+  --g50:#0a2a1e;
+  --g100:#0d3525;
 }
 
 /* Better form controls globally */
@@ -798,4 +806,9 @@ h4.fw-bold {
 [data-bs-theme="dark"] .chart-title { color:#f1f5f9 !important; }
 [data-bs-theme="dark"] .form-label { color:#d1d5db !important; }
 [data-bs-theme="dark"] .form-section-title { color:#64748b !important; }
-</script>
+[data-bs-theme="dark"] td,
+[data-bs-theme="dark"] td[style] { color:#e2e8f0 !important; }
+[data-bs-theme="dark"] .ev-name,
+[data-bs-theme="dark"] .feed-name,
+[data-bs-theme="dark"] p { color:#cbd5e1 !important; }
+</style>
