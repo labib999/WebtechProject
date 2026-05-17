@@ -518,12 +518,17 @@ new Chart(document.getElementById('tierChart'),{
   }
 });
 
-// Count-up animation
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-count]').forEach(el=>{
-    const target=parseInt(el.dataset.count)||0;
-    if(target===0) return;
-    countUp(el,target,1000);
+    const target = parseInt(el.dataset.count) || 0;
+    if(target === 0) return;
+    let current = 0;
+    const step = target / 40;
+    const timer = setInterval(()=>{
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current);
+      if(current >= target) clearInterval(timer);
+    }, 25);
   });
 });
 </script>

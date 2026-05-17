@@ -422,9 +422,15 @@ function nav($page, $active) {
   <div class="topbar">
     <span class="topbar-title"><?= htmlspecialchars($pageTitle ?? '') ?></span>
     <div class="topbar-right">
-      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-        <i class="bi bi-moon-fill" id="themeIcon"></i>
-      </button>
+   <button class="theme-toggle" id="themeToggle" onclick="
+  var h=document.documentElement;
+  var n=h.getAttribute('data-bs-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-bs-theme',n);
+  localStorage.setItem('ep_theme',n);
+  document.getElementById('themeIcon').className=n==='dark'?'bi bi-sun-fill':'bi bi-moon-fill';
+" title="Toggle dark mode">
+  <i class="bi bi-moon-fill" id="themeIcon"></i>
+</button>
       <div class="dropdown user-dropdown">
         <button class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <div class="top-avatar">
@@ -750,4 +756,46 @@ h4.fw-bold {
   transition:box-shadow .25s !important;
 }
 .chart-card:hover { box-shadow:var(--sh-lg) !important; }
+/* ═══════════════════════════════════════
+   DARK MODE COMPREHENSIVE FIX
+═══════════════════════════════════════ */
+[data-bs-theme="dark"] .content { background:transparent; }
+[data-bs-theme="dark"] .kpi,[data-bs-theme="dark"] .kpi-card,[data-bs-theme="dark"] .an-card,
+[data-bs-theme="dark"] .chart-card,[data-bs-theme="dark"] .form-section,
+[data-bs-theme="dark"] .filter-bar,[data-bs-theme="dark"] .summary-card {
+  background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; color:#d1d5db !important;
+}
+[data-bs-theme="dark"] h1,[data-bs-theme="dark"] h2,[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,[data-bs-theme="dark"] h5,[data-bs-theme="dark"] h6 { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .text-muted { color:#94a3b8 !important; }
+[data-bs-theme="dark"] .stat-ci { background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; }
+[data-bs-theme="dark"] .stat-val { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .stat-lbl,[data-bs-theme="dark"] .stat-sub { color:#64748b !important; }
+[data-bs-theme="dark"] .events-card { background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; }
+[data-bs-theme="dark"] .ev-row { border-color:#1e2a3a !important; }
+[data-bs-theme="dark"] .ev-row:hover { background:#1c2d2a !important; }
+[data-bs-theme="dark"] .ev-title,[data-bs-theme="dark"] .ev-revenue { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .feed-card,[data-bs-theme="dark"] .feed { background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; }
+[data-bs-theme="dark"] .feed-hdr { border-color:#1e2a3a !important; }
+[data-bs-theme="dark"] .feed-hdr h6,[data-bs-theme="dark"] .feed-hdr-title { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .feed-item { border-color:#1e2a3a !important; }
+[data-bs-theme="dark"] .feed-item:hover { background:#1c2d2a !important; }
+[data-bs-theme="dark"] .feed-name { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .feed-avatar { background:#1e2a3a !important; border-color:#2d3748 !important; }
+[data-bs-theme="dark"] .bk-table th { background:#1e2a3a !important; color:#64748b !important; border-color:#2d3748 !important; }
+[data-bs-theme="dark"] .bk-table td { border-color:#1e2a3a !important; color:#d1d5db !important; }
+[data-bs-theme="dark"] .bk-table tr:hover td { background:#1c2d2a !important; }
+[data-bs-theme="dark"] .section-card { background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; }
+[data-bs-theme="dark"] .sc-hdr { border-color:#1e2a3a !important; }
+[data-bs-theme="dark"] .sc-title { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .code-card,[data-bs-theme="dark"] .req-card,[data-bs-theme="dark"] .rev-card {
+  background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important;
+}
+[data-bs-theme="dark"] .code-text,[data-bs-theme="dark"] .req-venue,[data-bs-theme="dark"] .rev-name { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .venue-card { background:#1a2030 !important; border-color:rgba(255,255,255,.07) !important; }
+[data-bs-theme="dark"] .venue-name { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .tab-pill:not(.active) { background:#1a2030 !important; border-color:#2d3748 !important; color:#94a3b8 !important; }
+[data-bs-theme="dark"] .chart-title { color:#f1f5f9 !important; }
+[data-bs-theme="dark"] .form-label { color:#d1d5db !important; }
+[data-bs-theme="dark"] .form-section-title { color:#64748b !important; }
 </script>
