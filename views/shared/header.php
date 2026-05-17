@@ -13,7 +13,7 @@
 <body>
 
 <?php if (isset($_SESSION['flash'])): ?>
-    <div class="alert alert-<?= $_SESSION['flash']['type'] ?> m-3">
+    <div class="alert alert-<?= $_SESSION['flash']['type'] ?>" style="margin-left:250px; margin: 1rem 1rem 0 260px; border-radius:10px;">
         <?= htmlspecialchars($_SESSION['flash']['msg']) ?>
     </div>
     <?php unset($_SESSION['flash']); ?>
