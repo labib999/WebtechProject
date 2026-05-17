@@ -106,11 +106,20 @@ class OrganiserController extends Controller {
              GROUP BY e.id ORDER BY e.created_at DESC LIMIT 5", "i", [$orgId]
         );
 
+        // Greeting based on Bangladesh time
+        date_default_timezone_set('Asia/Dhaka');
+        $hour = (int)date('H');
+        if ($hour >= 5 && $hour < 12)      $greeting = 'Good morning';
+        elseif ($hour >= 12 && $hour < 17) $greeting = 'Good afternoon';
+        elseif ($hour >= 17 && $hour < 21) $greeting = 'Good evening';
+        else                               $greeting = 'Good night';
+
         $this->view('organiser/dashboard', compact(
             'totalEvents', 'publishedEvents', 'ticketsSold', 'totalRevenue',
             'totalCheckedIn', 'totalActive', 'checkinRate',
             'avgRating', 'reviewCount', 'pendingRefunds',
-            'recentBookings', 'salesChart', 'tierChart', 'myEvents'
+            'recentBookings', 'salesChart', 'tierChart', 'myEvents',
+            'greeting'
         ));
     }
 }

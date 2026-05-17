@@ -25,7 +25,9 @@ include __DIR__ . '/../layouts/organiser-header.php';
   [data-bs-theme="dark"] .form-section { background:#1f2937; border-color:#374151; }
   [data-bs-theme="dark"] .form-control { background:#253245; border-color:#374151; color:#f3f4f6; }
   [data-bs-theme="dark"] .form-label   { color:#d1d5db; }
+
 </style>
+
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4 class="fw-bold mb-0" style="font-size:1.05rem;">My Profile</h4>

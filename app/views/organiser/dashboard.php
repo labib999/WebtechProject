@@ -1,8 +1,6 @@
 <?php
 $pageTitle  = 'Dashboard';
 $activePage = 'dashboard';
-$hour       = (int)date('H');
-$greeting   = $hour < 12 ? 'Good morning' : ($hour < 17 ? 'Good afternoon' : 'Good evening');
 include __DIR__ . '/../layouts/organiser-header.php';
 ?>
 <style>

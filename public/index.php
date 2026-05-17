@@ -5,6 +5,20 @@ require_once '../app/core/Auth.php';
 require_once '../app/core/Router.php';
 require_once '../app/core/Controller.php';
 
+// Models
+require_once '../app/models/Model.php';
+require_once '../app/models/EventModel.php';
+require_once '../app/models/TierModel.php';
+require_once '../app/models/BookingModel.php';
+require_once '../app/models/DiscountModel.php';
+require_once '../app/models/RefundModel.php';
+require_once '../app/models/ReviewModel.php';
+require_once '../app/models/AnnouncementModel.php';
+require_once '../app/models/ProfileModel.php';
+require_once '../app/models/VenueModel.php';
+require_once '../app/models/AnalyticsModel.php';
+
+// Controllers
 require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/OrganiserController.php';
 require_once '../app/controllers/EventController.php';
@@ -35,17 +49,12 @@ if ($route === '' || $route === 'home') {
 
 $router = new Router();
 
-// Auth
 $router->add('login',                        'AuthController',         'showLogin');
 $router->add('login-submit',                 'AuthController',         'processLogin');
 $router->add('register',                     'AuthController',         'showRegister');
 $router->add('register-submit',              'AuthController',         'processRegister');
 $router->add('logout',                       'AuthController',         'logout');
-
-// Dashboard
 $router->add('organiser/dashboard',          'OrganiserController',    'dashboard');
-
-// Events
 $router->add('organiser/events',             'EventController',        'index');
 $router->add('organiser/events/create',      'EventController',        'create');
 $router->add('organiser/events/store',       'EventController',        'store');
@@ -53,43 +62,25 @@ $router->add('organiser/events/publish',     'EventController',        'publish'
 $router->add('organiser/events/cancel',      'EventController',        'cancel');
 $router->add('organiser/events/edit',        'EventController',        'edit');
 $router->add('organiser/events/update',      'EventController',        'update');
-
-// Ticket Tiers
 $router->add('organiser/tiers',              'TierController',         'index');
 $router->add('organiser/tiers/store',        'TierController',         'store');
 $router->add('organiser/tiers/delete',       'TierController',         'delete');
-
-// Check-in
 $router->add('organiser/checkin',            'CheckinController',      'scanner');
 $router->add('organiser/checkin/process',    'CheckinController',      'process');
-
-// Bookings & Analytics
 $router->add('organiser/bookings',           'BookingController',      'index');
 $router->add('organiser/analytics',          'AnalyticsController',    'index');
-
-// Discount Codes
 $router->add('organiser/discounts',          'DiscountController',     'index');
 $router->add('organiser/discounts/store',    'DiscountController',     'store');
 $router->add('organiser/discounts/toggle',   'DiscountController',     'toggle');
-
-// Refunds
 $router->add('organiser/refunds',            'RefundController',       'index');
 $router->add('organiser/refunds/approve',    'RefundController',       'approve');
 $router->add('organiser/refunds/reject',     'RefundController',       'reject');
-
-// Reviews
 $router->add('organiser/reviews',            'ReviewController',       'index');
 $router->add('organiser/reviews/reply',      'ReviewController',       'reply');
-
-// Announcements
 $router->add('organiser/announcements',      'AnnouncementController', 'index');
 $router->add('organiser/announcements/send', 'AnnouncementController', 'send');
-
-// Profile
 $router->add('organiser/profile',            'ProfileController',      'show');
 $router->add('organiser/profile/update',     'ProfileController',      'update');
-
-// Venues
 $router->add('organiser/venues',             'VenueController',        'browse');
 $router->add('organiser/venues/request',     'VenueController',        'request');
 $router->add('organiser/venue-requests',     'VenueController',        'myRequests');

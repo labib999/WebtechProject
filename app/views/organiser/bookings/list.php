@@ -160,7 +160,7 @@ include __DIR__ . '/../../layouts/organiser-header.php';
           <td>
             <?php if ($b['checked_in']): ?>
               <span class="pill pill-checked"><i class="bi bi-check-circle-fill me-1"></i>
-                <?= date('H:i', strtotime($b['checked_in_at'])) ?>
+                <?= date('g:i A', strtotime($b['checked_in_at'])) ?>
               </span>
             <?php else: ?>
               <span class="pill pill-pending"><i class="bi bi-clock me-1"></i>Pending</span>

@@ -241,7 +241,7 @@ $remaining      = $totalSold - $checkedInCount;
               <div class="feed-name"><?= htmlspecialchars($ci['attendee_name']) ?></div>
               <div class="feed-meta"><?= htmlspecialchars($ci['tier_name']) ?></div>
             </div>
-            <span class="feed-time"><?= $ci['checked_in_at'] ? date('H:i',strtotime($ci['checked_in_at'])) : '—' ?></span>
+            <span class="feed-time"><?= $ci['checked_in_at'] ? date('g:i A',strtotime($ci['checked_in_at'])) : '—' ?></span>
           </div>
         <?php endforeach; endif; ?>
       </div>

@@ -141,7 +141,7 @@ include __DIR__ . '/../../layouts/organiser-header.php';
       <div class="ev-title text-truncate"><?= htmlspecialchars($ev['title']) ?></div>
       <div class="ev-meta">
         <span><i class="bi bi-calendar3 me-1"></i><?= date('d M Y', strtotime($ev['event_datetime'])) ?></span>
-        <span><i class="bi bi-clock me-1"></i><?= date('H:i', strtotime($ev['event_datetime'])) ?></span>
+        <span><i class="bi bi-clock me-1"></i><?= date('g:i A', strtotime($ev['event_datetime'])) ?></span>
         <?php if (!empty($ev['venue_name_override'])): ?>
           <span><i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($ev['venue_name_override']) ?></span>
         <?php endif; ?>
