@@ -150,7 +150,16 @@ include __DIR__ . '/../../layouts/organiser-header.php';
                   : 'background:#EFF6FF;color:#1d4ed8;')
             ?>"><?= htmlspecialchars($b['tier_name']) ?></span>
           </td>
-          <td><code style="font-size:.78rem;color:#0F6E56;"><?= htmlspecialchars($b['ticket_code']) ?></code></td>
+          <td><div style="display:flex;align-items:center;gap:.4rem;">
+  <code style="font-size:.78rem;color:#0F6E56;" id="code-<?= $b['id'] ?>">
+    <?= htmlspecialchars($b['ticket_code']) ?>
+  </code>
+  <button onclick="copyCode('<?= $b['ticket_code'] ?>', <?= $b['id'] ?>)"
+          style="background:none;border:none;cursor:pointer;color:#9ca3af;padding:0;"
+          title="Copy ticket code">
+    <i class="bi bi-clipboard" id="icon-<?= $b['id'] ?>"></i>
+  </button>
+</div></td>
           <td style="font-weight:600;">$<?= number_format($b['total_price'],2) ?></td>
           <td>
             <span class="pill pill-<?= $b['status'] ?>">
@@ -174,5 +183,19 @@ include __DIR__ . '/../../layouts/organiser-header.php';
   </div>
   <?php endif; ?>
 </div>
+
+<script>
+function copyCode(code, id) {
+  navigator.clipboard.writeText(code).then(() => {
+    const icon = document.getElementById('icon-' + id);
+    icon.className = 'bi bi-clipboard-check';
+    icon.style.color = '#0F6E56';
+    setTimeout(() => {
+      icon.className = 'bi bi-clipboard';
+      icon.style.color = '#9ca3af';
+    }, 2000);
+  });
+}
+</script>
 
 <?php include __DIR__ . '/../../layouts/organiser-footer.php'; ?>
