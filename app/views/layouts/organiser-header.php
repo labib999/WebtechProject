@@ -464,9 +464,12 @@ function nav($page, $active) {
 (function(){
   const s=localStorage.getItem('ep_theme')||'light';
   document.documentElement.setAttribute('data-bs-theme',s);
+})();
+document.addEventListener('DOMContentLoaded',function(){
+  const s=localStorage.getItem('ep_theme')||'light';
   const ic=document.getElementById('themeIcon');
   if(ic) ic.className=s==='dark'?'bi bi-sun-fill':'bi bi-moon-fill';
-})();
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -539,16 +542,15 @@ document.addEventListener('DOMContentLoaded',function(){
    GLOBAL PAGE IMPROVEMENTS
 ═══════════════════════════════════════ */
 
-/* Subtle dot grid background — makes every page premium */
 body {
   background:#e8edf3;
   background-image:radial-gradient(#c8d0db 1px, transparent 1px);
   background-size:24px 24px;
 }
 [data-bs-theme="dark"] body {
-  background:#0d1117;
-  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size:24px 24px;
+  background:#0d1117!important;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px)!important;
+  background-size:24px 24px!important;
 }
 
 /* Better form controls globally */
