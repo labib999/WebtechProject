@@ -17,9 +17,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </div>
 
     <div class="menu-section">
-        <span class="menu-title">BOOKING</span>
-        <a href="ticket-print.php" class="<?php echo ($currentPage == 'ticket-print.php') ? 'active' : ''; ?>">Print Ticket</a>
-    </div>
+    <span class="menu-title">BOOKING</span>
+    <a href="ticket-print.php" class="<?php echo ($currentPage == 'ticket-print.php') ? 'active' : ''; ?>">Print Ticket</a>
+    <a href="reviews.php" class="<?php echo ($currentPage == 'reviews.php') ? 'active' : ''; ?>">My Reviews</a>
+</div>
 
     <div class="menu-section">
         <span class="menu-title">ACCOUNT</span>
