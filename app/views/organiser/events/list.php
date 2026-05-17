@@ -140,7 +140,19 @@ include __DIR__ . '/../../layouts/organiser-header.php';
     <div style="flex:1;min-width:0;">
       <div class="ev-title text-truncate"><?= htmlspecialchars($ev['title']) ?></div>
       <div class="ev-meta">
-        <span><i class="bi bi-calendar3 me-1"></i><?= date('d M Y', strtotime($ev['event_datetime'])) ?></span>
+        <?php
+$eventDate = strtotime($ev['event_datetime']);
+$today     = strtotime('today');
+$diff      = (int)(($eventDate - $today) / 86400);
+if ($diff > 0)      $countdown = "in {$diff} day" . ($diff!=1?'s':'');
+elseif ($diff === 0) $countdown = "Today!";
+else                 $countdown = abs($diff) . " days ago";
+?>
+<span><i class="bi bi-calendar3 me-1"></i><?= date('d M Y', strtotime($ev['event_datetime'])) ?></span>
+<span style="background:#f0faf5;color:#0F6E56;padding:1px 7px;border-radius:10px;font-size:.72rem;font-weight:600;">
+  <?= $countdown ?>
+</span>
+
         <span><i class="bi bi-clock me-1"></i><?= date('g:i A', strtotime($ev['event_datetime'])) ?></span>
         <?php if (!empty($ev['venue_name_override'])): ?>
           <span><i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($ev['venue_name_override']) ?></span>
