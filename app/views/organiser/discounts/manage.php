@@ -45,7 +45,17 @@ include __DIR__ . '/../../layouts/organiser-header.php';
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h4 class="fw-bold mb-0" style="font-size:1.05rem;">Discount Codes</h4>
-    <p class="text-muted mb-0" style="font-size:.8rem;"><?= count($codes) ?> code<?= count($codes)!=1?'s':'' ?> total</p>
+   <?php
+$activeCodes   = count(array_filter($codes, fn($c) => $c['is_active']));
+$inactiveCodes = count($codes) - $activeCodes;
+?>
+<p class="text-muted mb-0" style="font-size:.8rem;">
+  <?= count($codes) ?> total &middot;
+  <span style="color:#065f46;"><?= $activeCodes ?> active</span>
+  <?php if ($inactiveCodes > 0): ?>
+    &middot; <span style="color:#9ca3af;"><?= $inactiveCodes ?> inactive</span>
+  <?php endif; ?>
+</p>
   </div>
 </div>
 
@@ -97,7 +107,7 @@ include __DIR__ . '/../../layouts/organiser-header.php';
       <div style="font-size:.78rem;color:#9ca3af;margin-top:.5rem;">
         <?= htmlspecialchars(mb_strimwidth($c['event_title'],0,35,'…')) ?>
       </div>
-
+            
       <div class="code-meta d-flex gap-3">
         <span><i class="bi bi-arrow-repeat me-1"></i>
           <?= $c['uses_count'] ?> used<?= $c['max_uses'] ? ' / '.$c['max_uses'].' max' : '' ?>
