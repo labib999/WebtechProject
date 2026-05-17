@@ -4,190 +4,314 @@ $activePage = 'events';
 include __DIR__ . '/../../layouts/organiser-header.php';
 ?>
 <style>
-  .filter-tab { padding:.4rem 1.1rem; border-radius:20px; font-size:.82rem; font-weight:600;
-    text-decoration:none; border:1.5px solid #e5e7eb; color:#6b7280; transition:all .15s; }
-  .filter-tab:hover { border-color:#0F6E56; color:#0F6E56; }
-  .filter-tab.active { background:#0F6E56; color:#fff; border-color:#0F6E56; }
-  .filter-badge { background:rgba(255,255,255,.25); border-radius:10px; font-size:.68rem; padding:1px 6px; margin-left:3px; }
-  .filter-tab:not(.active) .filter-badge { background:#f3f4f6; color:#6b7280; }
+.page-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;
+}
+.page-title  { font-size:1.4rem; font-weight:900; color:#0f172a; letter-spacing:-.4px; }
+.page-sub    { font-size:.84rem; color:var(--gray500); margin-top:.15rem; }
+[data-bs-theme="dark"] .page-title { color:#f1f5f9; }
 
-  .ev-row { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem;
-    border-bottom:1px solid #f3f4f6; transition:background .12s; }
-  .ev-row:last-child { border-bottom:none; }
-  .ev-row:hover { background:#f8fffd; }
-  .ev-thumb { width:72px; height:50px; border-radius:8px; flex-shrink:0; overflow:hidden;
-    background:#E1F5EE; display:flex; align-items:center; justify-content:center;
-    color:#0F6E56; font-size:1.3rem; }
-  .ev-thumb img { width:100%; height:100%; object-fit:cover; }
-  .ev-title { font-size:.9rem; font-weight:700; color:#111; margin-bottom:.15rem; }
-  .ev-meta  { font-size:.75rem; color:#9ca3af; display:flex; flex-wrap:wrap; gap:.6rem; }
-  .st-badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:700; }
-  .st-published { background:#ECFDF5; color:#065f46; }
-  .st-draft      { background:#F3F4F6; color:#374151; }
-  .st-cancelled  { background:#FEF2F2; color:#991b1b; }
-  .st-completed  { background:#EFF6FF; color:#1e40af; }
-  .btn-ev { padding:.3rem .75rem; border-radius:7px; font-size:.78rem; font-weight:600;
-    text-decoration:none; border:1.5px solid; cursor:pointer; background:none;
-    transition:all .15s; display:inline-flex; align-items:center; gap:.3rem; }
-  .btn-ev-edit  { color:#374151; border-color:#e5e7eb; }
-  .btn-ev-edit:hover  { background:#f3f4f6; }
-  .btn-ev-pub   { color:#065f46; border-color:#6ee7b7; }
-  .btn-ev-pub:hover   { background:#ECFDF5; }
-  .btn-ev-cxl   { color:#991b1b; border-color:#fecaca; }
-  .btn-ev-cxl:hover   { background:#FEF2F2; }
-  .qa-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.1rem;
-    border-radius:10px; font-size:.84rem; font-weight:600; text-decoration:none;
-    border:1.5px solid transparent; transition:all .16s; }
-  .qa-primary { background:#0F6E56; color:#fff; border-color:#0F6E56; }
-  .qa-primary:hover { background:#063D30; color:#fff; }
-  .empty-state { text-align:center; padding:4rem 2rem; color:#9ca3af; }
-  .empty-state i { font-size:3rem; display:block; margin-bottom:1rem; color:#d1d5db; }
-  .empty-state h5 { font-size:1rem; font-weight:700; color:#374151; }
+.create-btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.65rem 1.25rem; border-radius:var(--r-full);
+  background:linear-gradient(135deg,var(--g800),var(--g500));
+  color:#fff; font-size:.88rem; font-weight:700;
+  text-decoration:none; transition:all .2s;
+  box-shadow:0 4px 16px rgba(15,110,86,.35);
+  border:none; cursor:pointer; font-family:'Inter',sans-serif;
+}
+.create-btn:hover {
+  transform:translateY(-2px); color:#fff;
+  box-shadow:0 8px 24px rgba(15,110,86,.45);
+}
 
-  [data-bs-theme="dark"] .ev-row         { border-color:#253245; }
-  [data-bs-theme="dark"] .ev-row:hover   { background:#1c2e3a; }
-  [data-bs-theme="dark"] .ev-title       { color:#f3f4f6; }
-  [data-bs-theme="dark"] .ev-meta        { color:#6b7280; }
-  [data-bs-theme="dark"] .filter-tab:not(.active) { border-color:#374151; color:#9ca3af; }
-  [data-bs-theme="dark"] .btn-ev-edit    { border-color:#374151; color:#d1d5db; }
-  [data-bs-theme="dark"] .st-draft       { background:#1f2937; color:#9ca3af; }
+/* Search */
+.search-wrap {
+  display:flex; align-items:center; gap:.75rem; margin-bottom:1.1rem;
+}
+.search-box {
+  flex:1; max-width:380px; display:flex; align-items:center;
+  background:#fff; border:1.5px solid #e2e8f0; border-radius:var(--r-full);
+  padding:.5rem .9rem; gap:.5rem;
+  box-shadow:var(--sh-sm); transition:all .2s;
+}
+.search-box:focus-within {
+  border-color:var(--g700);
+  box-shadow:0 0 0 3px rgba(15,110,86,.1),var(--sh-sm);
+}
+.search-box i { color:#94a3b8; font-size:1rem; flex-shrink:0; }
+.search-box input {
+  border:none; outline:none; background:none; font-family:'Inter',sans-serif;
+  font-size:.9rem; color:#374151; width:100%;
+}
+.search-box input::placeholder { color:#94a3b8; }
+[data-bs-theme="dark"] .search-box {
+  background:#1a2030; border-color:#2d3748;
+}
+[data-bs-theme="dark"] .search-box input { color:#e2e8f0; }
+
+/* Filter tabs */
+.tab-row { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.25rem; }
+.tab-pill {
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.38rem .9rem; border-radius:var(--r-full);
+  font-size:.82rem; font-weight:600; text-decoration:none;
+  border:1.5px solid #e2e8f0; color:#64748b;
+  background:#fff; transition:all .18s; white-space:nowrap;
+  box-shadow:var(--sh-sm);
+}
+.tab-pill:hover { border-color:var(--g300); color:var(--g700); }
+.tab-pill.active {
+  background:linear-gradient(135deg,var(--g700),var(--g500));
+  border-color:transparent; color:#fff;
+  box-shadow:0 4px 14px rgba(15,110,86,.3);
+}
+.tab-count {
+  background:rgba(255,255,255,.25); border-radius:99px;
+  font-size:.7rem; padding:1px 6px; font-weight:700;
+}
+.tab-pill:not(.active) .tab-count {
+  background:#f1f5f9; color:#64748b;
+}
+[data-bs-theme="dark"] .tab-pill:not(.active) {
+  background:#1a2030; border-color:#2d3748; color:#94a3b8;
+}
+
+/* Events list card */
+.events-card {
+  background:#fff; border-radius:var(--r-xl);
+  box-shadow:var(--sh-md); border:1px solid rgba(0,0,0,.05);
+  overflow:hidden;
+}
+[data-bs-theme="dark"] .events-card {
+  background:#1a2030; border-color:rgba(255,255,255,.06);
+}
+
+.ev-row {
+  display:flex; align-items:center; gap:1rem;
+  padding:1rem 1.25rem; border-bottom:1px solid #f1f5f9;
+  transition:all .18s var(--ease);
+}
+.ev-row:last-child { border-bottom:none; }
+.ev-row:hover { background:#f8fffe; }
+[data-bs-theme="dark"] .ev-row { border-color:#1e2a3a; }
+[data-bs-theme="dark"] .ev-row:hover { background:#1c2d2a; }
+
+.ev-thumb {
+  width:54px; height:54px; border-radius:14px; flex-shrink:0;
+  overflow:hidden; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,var(--g100),var(--g50));
+  color:var(--g700); font-size:1.35rem;
+  border:1px solid var(--g100);
+}
+.ev-thumb img { width:100%; height:100%; object-fit:cover; }
+
+.ev-info { flex:1; min-width:0; }
+.ev-title {
+  font-size:.95rem; font-weight:700; color:#0f172a;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  margin-bottom:.25rem; letter-spacing:-.2px;
+}
+[data-bs-theme="dark"] .ev-title { color:#f1f5f9; }
+.ev-meta {
+  display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;
+}
+.ev-meta span {
+  display:inline-flex; align-items:center; gap:.3rem;
+  font-size:.76rem; color:#94a3b8;
+}
+.ev-meta i { font-size:.8rem; }
+.ev-countdown {
+  background:var(--g50); color:var(--g700);
+  padding:2px 8px; border-radius:99px;
+  font-size:.73rem; font-weight:700;
+  border:1px solid var(--g100);
+}
+.ev-countdown.past { background:#fef2f2; color:#dc2626; border-color:#fecaca; }
+.ev-countdown.today { background:#fffbeb; color:#d97706; border-color:#fde68a; }
+
+.ev-stats { text-align:right; min-width:90px; flex-shrink:0; }
+.ev-revenue { font-size:1rem; font-weight:800; color:#0f172a; letter-spacing:-.3px; }
+[data-bs-theme="dark"] .ev-revenue { color:#f1f5f9; }
+.ev-bookings { font-size:.74rem; color:#94a3b8; margin-top:.1rem; }
+
+.ev-status { min-width:90px; text-align:center; flex-shrink:0; }
+.status-pill {
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:4px 12px; border-radius:99px; font-size:.76rem; font-weight:700;
+}
+.sp-published { background:#dcfce7; color:#15803d; }
+.sp-draft     { background:#f1f5f9; color:#475569; }
+.sp-cancelled { background:#fef2f2; color:#dc2626; }
+.sp-completed { background:#eff6ff; color:#1d4ed8; }
+
+.ev-actions { display:flex; gap:.4rem; flex-shrink:0; }
+.act-btn {
+  display:inline-flex; align-items:center; gap:.3rem;
+  padding:.35rem .75rem; border-radius:var(--r-sm);
+  font-size:.78rem; font-weight:600; cursor:pointer;
+  text-decoration:none; border:1.5px solid; background:none;
+  transition:all .15s; font-family:'Inter',sans-serif;
+  white-space:nowrap;
+}
+.act-edit { color:#475569; border-color:#e2e8f0; }
+.act-edit:hover { background:#f8fafc; color:#0f172a; border-color:#cbd5e1; }
+.act-pub  { color:#15803d; border-color:#86efac; }
+.act-pub:hover  { background:#f0fdf4; }
+.act-cxl  { color:#dc2626; border-color:#fecaca; }
+.act-cxl:hover  { background:#fef2f2; }
+
+/* Empty state */
+.empty-state {
+  text-align:center; padding:4rem 2rem; color:#94a3b8;
+}
+.empty-icon {
+  width:72px; height:72px; border-radius:20px;
+  background:linear-gradient(135deg,var(--g100),var(--g50));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem; color:var(--g300); margin:0 auto 1.25rem;
+}
+.empty-title { font-size:1rem; font-weight:700; color:#475569; margin-bottom:.4rem; }
+.empty-sub   { font-size:.86rem; color:#94a3b8; margin-bottom:1.5rem; }
+
+/* No results */
+#noResults {
+  display:none; text-align:center; padding:3rem;
+  color:#94a3b8; font-size:.9rem;
+}
 </style>
 
-<!-- Header -->
-<div class="d-flex justify-content-between align-items-center mb-3">
+<!-- Page Header -->
+<div class="page-header">
   <div>
-    <h4 class="fw-bold mb-0" style="font-size:1.1rem;">My Events</h4>
-    <p class="text-muted mb-0" style="font-size:.81rem;">
+    <div class="page-title">My Events</div>
+    <div class="page-sub">
       <span id="evCount"><?= $statusCounts['all'] ?></span>
-      event<?= $statusCounts['all'] != 1 ? 's' : '' ?> total
-    </p>
+      event<?= $statusCounts['all']!=1?'s':'' ?> total
+    </div>
   </div>
-  <a href="/WebtechProject/public/organiser/events/create" class="qa-btn qa-primary">
+  <a href="/WebtechProject/public/organiser/events/create" class="create-btn">
     <i class="bi bi-plus-circle-fill"></i> Create New Event
   </a>
 </div>
 
-<!-- Flash messages -->
+<!-- Flash -->
 <?php if (!empty($success)): ?>
-  <div class="d-flex align-items-center gap-2 mb-3 p-3"
-       style="background:#ECFDF5;border:1px solid #6ee7b7;color:#065f46;border-radius:10px;font-size:.88rem;">
-    <i class="bi bi-check-circle-fill"></i><span><?= htmlspecialchars($success) ?></span>
+  <div style="display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;
+              background:#f0fdf4;border:1px solid #86efac;color:#15803d;
+              border-radius:var(--r-md);font-size:.88rem;margin-bottom:1rem;font-weight:500;">
+    <i class="bi bi-check-circle-fill"></i><?= htmlspecialchars($success) ?>
   </div>
 <?php endif; ?>
 <?php if (!empty($error)): ?>
-  <div class="d-flex align-items-center gap-2 mb-3 p-3"
-       style="background:#FEF2F2;border:1px solid #fecaca;color:#991b1b;border-radius:10px;font-size:.88rem;">
-    <i class="bi bi-exclamation-circle-fill"></i><span><?= htmlspecialchars($error) ?></span>
+  <div style="display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;
+              background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+              border-radius:var(--r-md);font-size:.88rem;margin-bottom:1rem;font-weight:500;">
+    <i class="bi bi-exclamation-circle-fill"></i><?= htmlspecialchars($error) ?>
   </div>
 <?php endif; ?>
 
-<!-- Live search bar -->
-<div class="mb-3" style="max-width:400px;">
-  <div class="input-group">
-    <span class="input-group-text" style="background:#f8fafc;border-color:#e5e7eb;color:#9ca3af;">
-      <i class="bi bi-search"></i>
-    </span>
-    <input type="text" id="liveSearch" class="form-control"
-           placeholder="Search events by title..."
-           style="border-color:#e5e7eb;"/>
-    <button class="btn btn-outline-secondary" type="button" id="clearSearch"
-            style="display:none;" onclick="clearSearch()">
-      <i class="bi bi-x-lg"></i>
-    </button>
+<!-- Search -->
+<div class="search-wrap">
+  <div class="search-box">
+    <i class="bi bi-search"></i>
+    <input type="text" id="liveSearch" placeholder="Search events by title..."/>
   </div>
 </div>
 
 <!-- Filter tabs -->
-<div class="d-flex flex-wrap gap-2 mb-4">
+<div class="tab-row">
   <?php
-  $tabs = ['all'=>'All','published'=>'Published','draft'=>'Draft','cancelled'=>'Cancelled','completed'=>'Completed'];
-  foreach ($tabs as $key => $label):
-    $cnt = $statusCounts[$key] ?? 0;
-    if ($key !== 'all' && $cnt === 0) continue;
+  $tabs=['all'=>'All','published'=>'Published','draft'=>'Draft',
+         'cancelled'=>'Cancelled','completed'=>'Completed'];
+  foreach($tabs as $key=>$label):
+    $cnt=$statusCounts[$key]??0;
+    if($key!=='all'&&$cnt===0) continue;
   ?>
-  <a href="/WebtechProject/public/organiser/events<?= $key !== 'all' ? '?status='.$key : '' ?>"
-     class="filter-tab <?= $filter === $key ? 'active' : '' ?>">
-    <?= $label ?><span class="filter-badge"><?= $cnt ?></span>
+  <a href="/WebtechProject/public/organiser/events<?= $key!=='all'?'?status='.$key:'' ?>"
+     class="tab-pill <?= $filter===$key?'active':'' ?>">
+    <?= $label ?><span class="tab-count"><?= $cnt ?></span>
   </a>
   <?php endforeach; ?>
 </div>
 
 <!-- Events list -->
-<div class="section-card">
+<div class="events-card">
   <?php if (empty($events)): ?>
     <div class="empty-state">
-      <i class="bi bi-calendar-x"></i>
-      <h5>No <?= $filter !== 'all' ? $filter . ' ' : '' ?>events yet</h5>
-      <p style="font-size:.85rem;margin-bottom:1.5rem;">
-        <?= $filter === 'all' ? 'Create your first event to start selling tickets.' : 'No events with this status.' ?>
-      </p>
-      <?php if ($filter === 'all'): ?>
-        <a href="/WebtechProject/public/organiser/events/create" class="qa-btn qa-primary">
+      <div class="empty-icon"><i class="bi bi-calendar-x"></i></div>
+      <div class="empty-title">No <?= $filter!=='all'?$filter.' ':'' ?>events yet</div>
+      <div class="empty-sub">
+        <?= $filter==='all'?'Create your first event to start selling tickets.':'No events with this status.' ?>
+      </div>
+      <?php if($filter==='all'): ?>
+        <a href="/WebtechProject/public/organiser/events/create" class="create-btn">
           <i class="bi bi-plus-circle-fill"></i> Create First Event
         </a>
       <?php endif; ?>
     </div>
-  <?php else: foreach ($events as $ev): ?>
+  <?php else: foreach($events as $ev):
+    $eventDate = strtotime($ev['event_datetime']);
+    $today     = strtotime('today');
+    $diff      = (int)(($eventDate-$today)/86400);
+    if($diff>0)       { $cdClass='ev-countdown'; $cdText="in {$diff}d"; }
+    elseif($diff===0) { $cdClass='ev-countdown today'; $cdText='Today!'; }
+    else              { $cdClass='ev-countdown past'; $cdText=abs($diff).'d ago'; }
+  ?>
   <div class="ev-row">
     <div class="ev-thumb">
-      <?php if (!empty($ev['banner_image_path'])): ?>
+      <?php if(!empty($ev['banner_image_path'])): ?>
         <img src="/WebtechProject/public/<?= htmlspecialchars($ev['banner_image_path']) ?>" alt=""/>
       <?php else: ?>
-        <i class="bi bi-calendar-event"></i>
+        <i class="bi bi-calendar-event-fill"></i>
       <?php endif; ?>
     </div>
 
-    <div style="flex:1;min-width:0;">
-      <div class="ev-title text-truncate"><?= htmlspecialchars($ev['title']) ?></div>
+    <div class="ev-info">
+      <div class="ev-title"><?= htmlspecialchars($ev['title']) ?></div>
       <div class="ev-meta">
-        <?php
-$eventDate = strtotime($ev['event_datetime']);
-$today     = strtotime('today');
-$diff      = (int)(($eventDate - $today) / 86400);
-if ($diff > 0)      $countdown = "in {$diff} day" . ($diff!=1?'s':'');
-elseif ($diff === 0) $countdown = "Today!";
-else                 $countdown = abs($diff) . " days ago";
-?>
-<span><i class="bi bi-calendar3 me-1"></i><?= date('d M Y', strtotime($ev['event_datetime'])) ?></span>
-<span style="background:#f0faf5;color:#0F6E56;padding:1px 7px;border-radius:10px;font-size:.72rem;font-weight:600;">
-  <?= $countdown ?>
-</span>
-
-        <span><i class="bi bi-clock me-1"></i><?= date('g:i A', strtotime($ev['event_datetime'])) ?></span>
-        <?php if (!empty($ev['venue_name_override'])): ?>
-          <span><i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($ev['venue_name_override']) ?></span>
+        <span><i class="bi bi-calendar3"></i><?= date('d M Y', $eventDate) ?></span>
+        <span><i class="bi bi-clock"></i><?= date('g:i A', $eventDate) ?></span>
+        <?php if(!empty($ev['category_name'])): ?>
+          <span><i class="bi bi-tag"></i><?= htmlspecialchars($ev['category_name']) ?></span>
         <?php endif; ?>
-        <?php if (!empty($ev['category_name'])): ?>
-          <span><i class="bi bi-tag me-1"></i><?= htmlspecialchars($ev['category_name']) ?></span>
-        <?php endif; ?>
+        <span class="<?= $cdClass ?>"><?= $cdText ?></span>
       </div>
     </div>
 
-    <div style="text-align:right;min-width:90px;flex-shrink:0;">
-      <div style="font-size:.9rem;font-weight:700;">$<?= number_format($ev['revenue'],0) ?></div>
-      <div style="font-size:.74rem;color:#9ca3af;"><?= $ev['bookings_count'] ?> booking<?= $ev['bookings_count']!=1?'s':'' ?></div>
+    <div class="ev-stats">
+      <div class="ev-revenue">$<?= number_format($ev['revenue'],0) ?></div>
+      <div class="ev-bookings"><?= $ev['bookings_count'] ?> booking<?= $ev['bookings_count']!=1?'s':'' ?></div>
     </div>
 
-    <div style="min-width:90px;text-align:center;flex-shrink:0;">
-      <span class="st-badge st-<?= $ev['status'] ?>"><?= ucfirst($ev['status']) ?></span>
+    <div class="ev-status">
+      <span class="status-pill sp-<?= $ev['status'] ?>">
+        <?php
+          $icons=['published'=>'bi-circle-fill','draft'=>'bi-circle','cancelled'=>'bi-x-circle-fill','completed'=>'bi-check-circle-fill'];
+          echo '<i class="bi '.$icons[$ev['status']].'"></i>';
+        ?>
+        <?= ucfirst($ev['status']) ?>
+      </span>
     </div>
 
-    <div class="d-flex gap-2" style="flex-shrink:0;">
+    <div class="ev-actions">
       <a href="/WebtechProject/public/organiser/events/edit?id=<?= $ev['id'] ?>"
-         class="btn-ev btn-ev-edit"><i class="bi bi-pencil"></i> Edit</a>
-
-      <?php if ($ev['status'] === 'draft'): ?>
+         class="act-btn act-edit">
+        <i class="bi bi-pencil"></i> Edit
+      </a>
+      <?php if($ev['status']==='draft'): ?>
         <form method="POST" action="/WebtechProject/public/organiser/events/publish" style="margin:0;">
           <input type="hidden" name="event_id" value="<?= $ev['id'] ?>"/>
-          <button type="submit" class="btn-ev btn-ev-pub">
+          <button type="submit" class="act-btn act-pub">
             <i class="bi bi-send-fill"></i> Publish
           </button>
         </form>
-      <?php elseif ($ev['status'] === 'published'): ?>
+      <?php elseif($ev['status']==='published'): ?>
         <form method="POST" action="/WebtechProject/public/organiser/events/cancel" style="margin:0;"
               onsubmit="return confirm('Cancel this event?')">
           <input type="hidden" name="event_id" value="<?= $ev['id'] ?>"/>
-          <button type="submit" class="btn-ev btn-ev-cxl">
+          <button type="submit" class="act-btn act-cxl">
             <i class="bi bi-x-circle"></i> Cancel
           </button>
         </form>
@@ -196,47 +320,31 @@ else                 $countdown = abs($diff) . " days ago";
   </div>
   <?php endforeach; endif; ?>
 
-  <!-- No results message -->
-  <div id="noResults" style="display:none;text-align:center;padding:3rem;color:#9ca3af;">
-    <i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:.5rem;color:#d1d5db;"></i>
-    <p style="font-size:.88rem;">No events match your search.</p>
+  <div id="noResults">
+    <i class="bi bi-search" style="font-size:1.5rem;display:block;margin-bottom:.5rem;"></i>
+    No events match your search.
   </div>
 </div>
 
 <script>
-const searchInput  = document.getElementById('liveSearch');
-const clearBtn     = document.getElementById('clearSearch');
-const noResults    = document.getElementById('noResults');
-const countEl      = document.getElementById('evCount');
-const totalEvents  = <?= count($events) ?>;
+const liveSearch = document.getElementById('liveSearch');
+const noResults  = document.getElementById('noResults');
+const countEl    = document.getElementById('evCount');
+const total      = <?= count($events) ?>;
 
-searchInput.addEventListener('input', function () {
+liveSearch?.addEventListener('input', function() {
   const term = this.value.toLowerCase().trim();
   const rows = document.querySelectorAll('.ev-row');
   let visible = 0;
-
   rows.forEach(row => {
-    const title = row.querySelector('.ev-title').textContent.toLowerCase();
-    const show  = term === '' || title.includes(term);
+    const title = row.querySelector('.ev-title')?.textContent.toLowerCase();
+    const show  = !term || title?.includes(term);
     row.style.display = show ? '' : 'none';
     if (show) visible++;
   });
-
-  // Show/hide "no results"
-  noResults.style.display = visible === 0 ? 'block' : 'none';
-
-  // Update count
+  noResults.style.display = visible===0 && term ? 'block' : 'none';
   countEl.textContent = visible;
-
-  // Show/hide clear button
-  clearBtn.style.display = term ? 'block' : 'none';
 });
-
-function clearSearch() {
-  searchInput.value = '';
-  searchInput.dispatchEvent(new Event('input'));
-  searchInput.focus();
-}
 </script>
 
 <?php include __DIR__ . '/../../layouts/organiser-footer.php'; ?>
