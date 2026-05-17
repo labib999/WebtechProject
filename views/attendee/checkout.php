@@ -29,6 +29,7 @@ $data = $result->fetch_assoc();
 $service_charge = 50;
 $total = $data["price"] + $service_charge;
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +45,9 @@ $total = $data["price"] + $service_charge;
             <p>Confirm your ticket booking</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search events...">
-            </div>
+            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>

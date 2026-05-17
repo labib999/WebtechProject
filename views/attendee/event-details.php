@@ -57,9 +57,9 @@ $reviewResult = $reviewStmt->get_result();
             <p>View complete information about the event</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search events...">
-            </div>
+            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>

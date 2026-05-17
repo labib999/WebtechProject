@@ -18,13 +18,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
+        if (!preg_match("/^[a-zA-Z ]+$/", $name)) {
+            $_SESSION["error"] = "Name must contain letters only";
+            header("Location: ../views/attendee/register.php");
+            exit();
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION["error"] = "Invalid email format";
+            header("Location: ../views/attendee/register.php");
+            exit();
+        }
+
+        if (!is_numeric($phone)) {
+            $_SESSION["error"] = "Phone must contain numbers only";
+            header("Location: ../views/attendee/register.php");
+            exit();
+        }
+
+        if (strlen($phone) != 11) {
+            $_SESSION["error"] = "Phone number must be 11 digits";
+            header("Location: ../views/attendee/register.php");
+            exit();
+        }
+
+        if (strlen($password) < 6) {
+            $_SESSION["error"] = "Password must be at least 6 characters";
+            header("Location: ../views/attendee/register.php");
+            exit();
+        }
+
         if ($password != $confirm_password) {
             $_SESSION["error"] = "Password does not match";
             header("Location: ../views/attendee/register.php");
             exit();
         }
 
-        $checkSql = "SELECT id FROM users WHERE email = ?";
+        $checkSql = "select id from users where email = ?";
         $checkStmt = $conn->prepare($checkSql);
         $checkStmt->bind_param("s", $email);
         $checkStmt->execute();
@@ -39,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $role = "attendee";
 
-        $sql = "INSERT INTO users (name, email, password_hash, phone, role) VALUES (?, ?, ?, ?, ?)";
+        $sql = "insert into users (name, email, password_hash, phone, role) values (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssss", $name, $email, $password_hash, $phone, $role);
 
@@ -64,7 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "SELECT * FROM users WHERE email = ? AND role = 'attendee' AND is_active = 1";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION["error"] = "Invalid email format";
+            header("Location: ../views/attendee/login.php");
+            exit();
+        }
+
+        $sql = "select * from users where email = ? and role = 'attendee' and is_active = 1";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();

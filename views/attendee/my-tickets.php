@@ -39,9 +39,6 @@ $totalTickets = $totalData["total"];
             <p>View your booked tickets</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
-                <input type="text" placeholder="Search tickets...">
-            </div>
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>
@@ -81,8 +78,8 @@ $totalTickets = $totalData["total"];
             <a href="events.php">Book New Ticket</a>
         </div>
 
-        <?php if ($result->num_rows > 0) { ?>
-            <?php while ($ticket = $result->fetch_assoc()) { ?>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($ticket = $result->fetch_assoc()): ?>
                 <div class="ticket-card">
                     <div class="ticket-left">
                         <span class="ticket-label"><?php echo $ticket["status"]; ?></span>
@@ -101,10 +98,10 @@ $totalTickets = $totalData["total"];
                         <a href="ticket-print.php?code=<?php echo $ticket["ticket_code"]; ?>" class="ticket-btn outline">Print</a>
                     </div>
                 </div>
-            <?php } ?>
-        <?php } else { ?>
+            <?php endwhile; ?>
+        <?php else: ?>
             <p>No tickets found. Please book an event first.</p>
-        <?php } ?>
+        <?php endif; ?>
     </div>
 </div>
 </body>

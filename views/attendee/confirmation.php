@@ -26,6 +26,7 @@ if ($result->num_rows != 1) {
 }
 
 $booking = $result->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,9 +43,9 @@ $booking = $result->fetch_assoc();
             <p>Your ticket has been booked successfully</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search events...">
-            </div>
+            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>

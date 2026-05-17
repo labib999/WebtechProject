@@ -43,9 +43,9 @@ $ticket = $result->fetch_assoc();
             <p>View your ticket information</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search tickets...">
-            </div>
+            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>

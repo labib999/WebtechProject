@@ -21,7 +21,8 @@ if ($search != "") {
     $stmt->bind_param("s", $searchText);
     $stmt->execute();
     $result = $stmt->get_result();
-} else {
+} 
+else {
     $sql = "select events.id, events.title, events.description, events.venue_name_override, events.event_datetime, categories.name as category_name,
             (select min(price) from ticket_tiers where ticket_tiers.event_id = events.id) as min_price
             from events
@@ -32,6 +33,7 @@ if ($search != "") {
     $result = $conn->query($sql);
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -74,7 +76,6 @@ function searchEvents(){
             } else {
                 output = '<div class="content-card"><h2>No events found</h2><p>Try another event name.</p></div>';
             }
-
             document.getElementById("eventsBox").innerHTML = output;
         }
     };
@@ -93,9 +94,9 @@ function searchEvents(){
                 <p>Search and find your favorite upcoming events</p>
             </div>
             <div class="topbar-right">
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <input type="text" placeholder="Search events...">
-                </div>
+                </div> -->
                 <div class="user-profile">
                     <img src="../../public/uploads/user.png" alt="User">
                     <div>

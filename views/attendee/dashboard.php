@@ -30,9 +30,25 @@ $attendedResult = $attendedStmt->get_result();
 $attendedData = $attendedResult->fetch_assoc();
 $eventsAttended = $attendedData["total"];
 
-$profileStatus = 75;
-if ($_SESSION["name"] != "" && $_SESSION["email"] != "") {
-    $profileStatus = 80;
+$userSql = "select name, email, phone from users where id = ?";
+$userStmt = $conn->prepare($userSql);
+$userStmt->bind_param("i", $attendee_id);
+$userStmt->execute();
+$userResult = $userStmt->get_result();
+$userData = $userResult->fetch_assoc();
+
+$profileStatus = 0;
+
+if ($userData["name"] != "") {
+    $profileStatus += 35;
+}
+
+if ($userData["email"] != "") {
+    $profileStatus += 35;
+}
+
+if ($userData["phone"] != "") {
+    $profileStatus += 30;
 }
 
 $bookingSql = "select bookings.*, events.title, events.event_datetime, ticket_tiers.name as tier_name
@@ -47,10 +63,10 @@ $bookingStmt->bind_param("i", $attendee_id);
 $bookingStmt->execute();
 $bookingResult = $bookingStmt->get_result();
 
-$eventSql = "select events.id, events.title, events.event_datetime, events.venue_name_override
+$eventSql = "select id, title, event_datetime, venue_name_override
 from events
-where events.status = 'published'
-order by events.event_datetime asc
+where status = 'published'
+order by event_datetime asc
 limit 3";
 $eventResult = $conn->query($eventSql);
 ?>
@@ -69,9 +85,6 @@ $eventResult = $conn->query($eventSql);
             <p>Manage your events and tickets easily</p>
         </div>
         <div class="topbar-right">
-            <div class="search-box">
-                <input type="text" placeholder="Search events...">
-            </div>
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>
@@ -126,20 +139,20 @@ $eventResult = $conn->query($eventSql);
                     <th>Ticket</th>
                     <th>Status</th>
                 </tr>
-                <?php if ($bookingResult->num_rows > 0) { ?>
-                    <?php while ($booking = $bookingResult->fetch_assoc()) { ?>
+                <?php if ($bookingResult->num_rows > 0): ?>
+                    <?php while ($booking = $bookingResult->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo $booking["title"]; ?></td>
                             <td><?php echo date("d M Y", strtotime($booking["event_datetime"])); ?></td>
                             <td><?php echo $booking["tier_name"]; ?></td>
                             <td><span class="badge active"><?php echo $booking["status"]; ?></span></td>
                         </tr>
-                    <?php } ?>
-                <?php } else { ?>
+                    <?php endwhile; ?>
+                <?php else: ?>
                     <tr>
                         <td colspan="4">No recent bookings found</td>
                     </tr>
-                <?php } ?>
+                <?php endif; ?>
             </table>
         </div>
 
@@ -157,8 +170,8 @@ $eventResult = $conn->query($eventSql);
             <a href="events.php">Explore More</a>
         </div>
         <div class="event-grid">
-            <?php if ($eventResult->num_rows > 0) { ?>
-                <?php while ($event = $eventResult->fetch_assoc()) { ?>
+            <?php if ($eventResult->num_rows > 0): ?>
+                <?php while ($event = $eventResult->fetch_assoc()): ?>
                     <div class="event-card">
                         <div class="event-image"></div>
                         <h3><?php echo $event["title"]; ?></h3>
@@ -166,10 +179,10 @@ $eventResult = $conn->query($eventSql);
                         <span><?php echo date("d M Y", strtotime($event["event_datetime"])); ?></span>
                         <a href="event-details.php?id=<?php echo $event["id"]; ?>" class="event-btn">View Details</a>
                     </div>
-                <?php } ?>
-            <?php } else { ?>
+                <?php endwhile; ?>
+            <?php else: ?>
                 <p>No upcoming events found.</p>
-            <?php } ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
