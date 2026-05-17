@@ -535,4 +535,217 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   });
 });
+/* ═══════════════════════════════════════
+   GLOBAL PAGE IMPROVEMENTS
+═══════════════════════════════════════ */
+
+/* Subtle dot grid background — makes every page premium */
+body {
+  background:#e8edf3;
+  background-image:radial-gradient(#c8d0db 1px, transparent 1px);
+  background-size:24px 24px;
+}
+[data-bs-theme="dark"] body {
+  background:#0d1117;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+
+/* Better form controls globally */
+.form-control, .form-select {
+  border:1.5px solid #e2e8f0 !important;
+  border-radius:10px !important;
+  font-family:'Inter',sans-serif !important;
+  font-size:.9rem !important;
+  padding:.65rem .9rem !important;
+  transition:all .2s var(--ease) !important;
+  background:#fff !important;
+  color:#374151 !important;
+}
+.form-control:focus, .form-select:focus {
+  border-color:var(--g700) !important;
+  box-shadow:0 0 0 3px rgba(15,110,86,.1) !important;
+  background:#fff !important;
+}
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background:#1e2536 !important;
+  border-color:#2d3748 !important;
+  color:#e2e8f0 !important;
+}
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  border-color:var(--g300) !important;
+  box-shadow:0 0 0 3px rgba(93,202,165,.12) !important;
+}
+
+/* Better stat/summary cards used across pages */
+.summary-card, .stat-ci, .kpi-card {
+  background:#fff;
+  border-radius:var(--r-lg) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+  box-shadow:var(--sh-md) !important;
+  transition:all .25s var(--ease) !important;
+}
+.summary-card:hover, .stat-ci:hover {
+  transform:translateY(-3px);
+  box-shadow:var(--sh-lg) !important;
+}
+[data-bs-theme="dark"] .summary-card,
+[data-bs-theme="dark"] .stat-ci {
+  background:#1a2030 !important;
+  border-color:rgba(255,255,255,.06) !important;
+}
+
+/* Better filter bars */
+.filter-bar {
+  background:#fff !important;
+  border-radius:var(--r-lg) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+  box-shadow:var(--sh-sm) !important;
+  padding:1rem 1.25rem !important;
+}
+[data-bs-theme="dark"] .filter-bar {
+  background:#1a2030 !important;
+  border-color:rgba(255,255,255,.06) !important;
+}
+
+/* Better buttons globally */
+button[type="submit"]:not(.btn-auth):not(.btn-ci):not(.btn-qr),
+.btn-add, .btn-send, .btn-submit-reply {
+  border-radius:var(--r-md) !important;
+  font-family:'Inter',sans-serif !important;
+  font-weight:600 !important;
+  transition:all .2s var(--ease) !important;
+}
+
+/* Better page headings */
+h4.fw-bold {
+  font-size:1.15rem !important;
+  letter-spacing:-.3px !important;
+  color:#0f172a !important;
+}
+[data-bs-theme="dark"] h4.fw-bold { color:#f1f5f9 !important; }
+
+/* Pill/badge improvements */
+.pill {
+  font-size:.74rem !important;
+  padding:3px 10px !important;
+  border-radius:99px !important;
+  font-weight:600 !important;
+  letter-spacing:.1px !important;
+}
+
+/* Better table styling */
+.bk-table th {
+  background:linear-gradient(180deg,#f8fafc,#f1f5f9) !important;
+  color:#64748b !important;
+  font-size:.68rem !important;
+  letter-spacing:.7px !important;
+  border-bottom:2px solid #e2e8f0 !important;
+}
+.bk-table tr:hover td { background:#f0fdf4 !important; }
+[data-bs-theme="dark"] .bk-table th {
+  background:#1e2536 !important;
+  color:#64748b !important;
+  border-color:#2d3748 !important;
+}
+[data-bs-theme="dark"] .bk-table tr:hover td { background:#1c2a1f !important; }
+
+/* Card content sections */
+.section-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+}
+.section-card:hover {
+  box-shadow:0 8px 32px rgba(0,0,0,.1) !important;
+}
+
+/* Better filter tabs */
+.filter-tab {
+  border-radius:99px !important;
+  font-weight:600 !important;
+  font-size:.82rem !important;
+  transition:all .18s var(--ease) !important;
+}
+.filter-tab.active {
+  background:linear-gradient(135deg,var(--g700),var(--g500)) !important;
+  border-color:transparent !important;
+  box-shadow:0 4px 14px rgba(15,110,86,.3) !important;
+}
+
+/* Form section cards */
+.form-section {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+}
+[data-bs-theme="dark"] .form-section {
+  background:#1a2030 !important;
+  border-color:rgba(255,255,255,.06) !important;
+}
+
+/* Venue cards */
+.venue-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+  transition:all .25s var(--ease) !important;
+}
+.venue-card:hover {
+  transform:translateY(-4px) !important;
+  box-shadow:var(--sh-lg) !important;
+}
+
+/* Review cards */
+.rev-card, .req-card, .ann-item {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+  transition:box-shadow .2s !important;
+}
+.rev-card:hover, .req-card:hover {
+  box-shadow:var(--sh-lg) !important;
+}
+
+/* Code card discount */
+.code-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  border:1px solid rgba(0,0,0,.05) !important;
+  transition:all .25s var(--ease) !important;
+}
+.code-card:hover {
+  transform:translateY(-3px) !important;
+  box-shadow:var(--sh-lg) !important;
+}
+
+/* Analytics cards */
+.an-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  transition:all .25s var(--ease) !important;
+}
+.an-card:hover { box-shadow:var(--sh-lg) !important; }
+
+/* Scanner wrap */
+.scanner-wrap {
+  border-radius:var(--r-xl) !important;
+  box-shadow:0 16px 48px rgba(0,0,0,.2) !important;
+}
+
+/* Feed card */
+.feed-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+}
+
+/* Chart cards */
+.chart-card {
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--sh-md) !important;
+  transition:box-shadow .25s !important;
+}
+.chart-card:hover { box-shadow:var(--sh-lg) !important; }
 </script>
