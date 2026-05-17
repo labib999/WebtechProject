@@ -422,13 +422,7 @@ function nav($page, $active) {
   <div class="topbar">
     <span class="topbar-title"><?= htmlspecialchars($pageTitle ?? '') ?></span>
     <div class="topbar-right">
-   <button class="theme-toggle" id="themeToggle" onclick="
-  var h=document.documentElement;
-  var n=h.getAttribute('data-bs-theme')==='dark'?'light':'dark';
-  h.setAttribute('data-bs-theme',n);
-  localStorage.setItem('ep_theme',n);
-  document.getElementById('themeIcon').className=n==='dark'?'bi bi-sun-fill':'bi bi-moon-fill';
-" title="Toggle dark mode">
+   <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
   <i class="bi bi-moon-fill" id="themeIcon"></i>
 </button>
       <div class="dropdown user-dropdown">
