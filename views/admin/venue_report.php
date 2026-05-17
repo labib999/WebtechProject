@@ -1,6 +1,5 @@
 <?php $activePage = 'venue_report'; ?>
-<?php require_once '../../config/db.php'; ?>
-<?php require_once '../../views/shared/header.php'; ?>
+<?php require_once 'views/shared/header.php'; ?>
 <link rel="stylesheet" href="/WebtechProject/public/css/admin.css">
 
 <div class="wrapper">

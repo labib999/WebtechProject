@@ -1,9 +1,8 @@
 <?php
-session_start();
-require_once '../config/db.php';
-require_once '../models/AdminModel.php';
-require_once '../models/UserModel.php';
-require_once '../models/EventModel.php';
+require_once 'config/db.php';
+require_once 'models/AdminModel.php';
+require_once 'models/UserModel.php';
+require_once 'models/EventModel.php';
 
 
 function checkAdminAuth() {
@@ -17,7 +16,6 @@ function checkAdminAuth() {
 function showDashboard() {
     checkAdminAuth();
 
-
     $totalUsers        = countTotalUsers();
     $upcomingEvents    = countUpcomingEvents();
     $ticketsToday      = countTicketsSoldToday();
@@ -25,9 +23,10 @@ function showDashboard() {
     $pendingOrganisers = countPendingOrganiserApprovals();
     $pendingVenues     = countPendingVenueManagerApprovals();
     $pendingTotal      = $pendingOrganisers + $pendingVenues;
+    $usersByRole       = countUsersByRole();
+    $recentUsers       = getAllUsers();
 
-
-    require_once '../views/admin/dashboard.php';
+    require_once 'views/admin/dashboard.php';
 }
 
 
@@ -44,7 +43,7 @@ function showApprovals() {
     $pendingVenues = getPendingVenueManagers();
 
     
-    require_once '../views/admin/approvals.php';
+    require_once 'views/admin/approvals.php';
 }
 
 // Approve an organiser
@@ -117,7 +116,7 @@ function showCategories() {
     $categories = getAllCategories();
 
     
-    require_once '../views/admin/categories.php';
+    require_once 'views/admin/categories.php';
 }
 
 // Add a new category
@@ -201,7 +200,7 @@ function showEvents() {
     $categories = getAllCategories();
 
     
-    require_once '../views/admin/events.php';
+    require_once 'views/admin/events.php';
 }
 
 // Cancel an event
@@ -247,7 +246,7 @@ function showComplaints() {
     $openComplaints     = getOpenComplaints();
     $resolvedComplaints = getResolvedComplaints();
 
-    require_once '../views/admin/complaints.php';
+    require_once 'views/admin/complaints.php';
 }
 
 // Resolve a complaint
@@ -278,7 +277,7 @@ function showAnnouncements() {
 
     $announcements = getAllAnnouncements();
 
-    require_once '../views/admin/announcements.php';
+    require_once 'views/admin/announcements.php';
 }
 
 // Post a new announcement
@@ -321,7 +320,7 @@ function showUsers() {
         $users = getAllUsers();
     }
 
-    require_once '../views/admin/users.php';
+    require_once 'views/admin/users.php';
 }
 
 // Suspend a user
@@ -358,7 +357,7 @@ function showFinancialReport() {
     $byCategory   = getRevenueByCategory();
     $commission   = getCommissionRate();
 
-    require_once '../views/admin/financial_report.php';
+    require_once 'views/admin/financial_report.php';
 }
 
 // Update commission rate
