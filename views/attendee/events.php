@@ -26,6 +26,7 @@ include("../../controllers/eventListController.php");
             </div>
         </div>
     </div>
+
     <div class="content-card filter-card">
         <h2>Find Events</h2>
         <form method="get" action="events.php">
@@ -39,6 +40,7 @@ include("../../controllers/eventListController.php");
             <a href="events.php" class="search-event-btn">Reset</a>
         </form>
     </div>
+
     <div class="events-page-grid" id="eventsBox">
         <?php if ($result->num_rows > 0): ?>
             <?php while ($event = $result->fetch_assoc()): ?>
