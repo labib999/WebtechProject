@@ -1,14 +1,13 @@
 <?php $activePage = 'financial_report'; ?>
-<?php require_once 'views/shared/header.php'; ?>
+<?php require_once __DIR__ . '/../../views/shared/header.php'; ?>
 <link rel="stylesheet" href="/WebtechProject/public/css/admin.css">
 
 <div class="wrapper">
 
-    <?php require_once 'navbar.php'; ?>
+    <?php require_once __DIR__ . '/navbar.php'; ?>
 
     <div class="main-content">
 
-        <!-- PAGE TITLE -->
         <div class="mb-4">
             <h1 class="page-title">Financial Report</h1>
             <p class="text-muted">Platform revenue overview for the current month.</p>
@@ -22,8 +21,8 @@
                         <i class="bi bi-cash-stack"></i>
                     </div>
                     <div class="stat-label">Gross Sales This Month</div>
-                    <div class="stat-number">$48,200</div>
-                    <div class="text-muted mt-1" style="font-size:0.8rem;">From 342 active bookings</div>
+                    <div class="stat-number">$<?= number_format($summary['gross_sales'] ?? 0, 2) ?></div>
+                    <div class="text-muted mt-1" style="font-size:0.8rem;">From <?= $summary['total_transactions'] ?? 0 ?> active bookings</div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -32,8 +31,8 @@
                         <i class="bi bi-percent"></i>
                     </div>
                     <div class="stat-label">Commission Earned</div>
-                    <div class="stat-number">$4,820</div>
-                    <div class="text-muted mt-1" style="font-size:0.8rem;">10% platform commission rate</div>
+                    <div class="stat-number">$<?= number_format(($summary['gross_sales'] ?? 0) * ($commission / 100), 2) ?></div>
+                    <div class="text-muted mt-1" style="font-size:0.8rem;"><?= $commission ?>% platform commission rate</div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -42,13 +41,13 @@
                         <i class="bi bi-receipt"></i>
                     </div>
                     <div class="stat-label">Total Transactions</div>
-                    <div class="stat-number">342</div>
+                    <div class="stat-number"><?= $summary['total_transactions'] ?? 0 ?></div>
                     <div class="text-muted mt-1" style="font-size:0.8rem;">Active bookings this month</div>
                 </div>
             </div>
         </div>
 
-        <!-- BOTTOM TABLES ROW -->
+        <!-- TABLES ROW -->
         <div class="row g-4">
 
             <!-- TOP 5 EVENTS -->
@@ -58,6 +57,9 @@
                         <i class="bi bi-trophy me-2"></i>Top 5 Events by Revenue
                     </div>
                     <div class="card-body p-0">
+                        <?php if (empty($topEvents)): ?>
+                            <div class="p-4 text-muted">No booking data yet.</div>
+                        <?php else: ?>
                         <table class="table table-striped mb-0">
                             <thead>
                                 <tr>
@@ -68,38 +70,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $medals = ['🥇','🥈','🥉','4','5']; ?>
+                                <?php foreach ($topEvents as $i => $event): ?>
                                 <tr>
-                                    <td>🥇</td>
-                                    <td>Dhaka Music Festival</td>
-                                    <td>Rahman Events</td>
-                                    <td class="fw-semibold text-success">$12,400</td>
+                                    <td><?= $medals[$i] ?></td>
+                                    <td><?= htmlspecialchars($event['title']) ?></td>
+                                    <td><?= htmlspecialchars($event['organiser_name']) ?></td>
+                                    <td class="fw-semibold text-success">$<?= number_format($event['revenue'], 2) ?></td>
                                 </tr>
-                                <tr>
-                                    <td>🥈</td>
-                                    <td>Tech Conference 2026</td>
-                                    <td>Star Concerts</td>
-                                    <td class="fw-semibold text-success">$9,800</td>
-                                </tr>
-                                <tr>
-                                    <td>🥉</td>
-                                    <td>Food Fest Dhaka</td>
-                                    <td>Rahman Events</td>
-                                    <td class="fw-semibold text-success">$7,200</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Art Exhibition BD</td>
-                                    <td>Mahinul Events</td>
-                                    <td class="fw-semibold text-success">$5,600</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Sports Day 2026</td>
-                                    <td>City Sports</td>
-                                    <td class="fw-semibold text-success">$4,100</td>
-                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -111,6 +93,9 @@
                         <i class="bi bi-people me-2"></i>Top 5 Organisers by Revenue
                     </div>
                     <div class="card-body p-0">
+                        <?php if (empty($topOrganisers)): ?>
+                            <div class="p-4 text-muted">No booking data yet.</div>
+                        <?php else: ?>
                         <table class="table table-striped mb-0">
                             <thead>
                                 <tr>
@@ -121,38 +106,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $medals = ['🥇','🥈','🥉','4','5']; ?>
+                                <?php foreach ($topOrganisers as $i => $org): ?>
                                 <tr>
-                                    <td>🥇</td>
-                                    <td>Rahman Events</td>
-                                    <td>8</td>
-                                    <td class="fw-semibold text-success">$19,600</td>
+                                    <td><?= $medals[$i] ?></td>
+                                    <td><?= htmlspecialchars($org['organiser_name']) ?></td>
+                                    <td><?= $org['event_count'] ?></td>
+                                    <td class="fw-semibold text-success">$<?= number_format($org['revenue'], 2) ?></td>
                                 </tr>
-                                <tr>
-                                    <td>🥈</td>
-                                    <td>Star Concerts</td>
-                                    <td>5</td>
-                                    <td class="fw-semibold text-success">$12,400</td>
-                                </tr>
-                                <tr>
-                                    <td>🥉</td>
-                                    <td>Mahinul Events</td>
-                                    <td>4</td>
-                                    <td class="fw-semibold text-success">$8,200</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>City Sports</td>
-                                    <td>3</td>
-                                    <td class="fw-semibold text-success">$5,400</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>BD Expo</td>
-                                    <td>2</td>
-                                    <td class="fw-semibold text-success">$2,600</td>
-                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -164,6 +129,10 @@
                         <i class="bi bi-bar-chart me-2"></i>Revenue by Category
                     </div>
                     <div class="card-body p-0">
+                        <?php if (empty($byCategory)): ?>
+                            <div class="p-4 text-muted">No booking data yet.</div>
+                        <?php else: ?>
+                        <?php $totalRevenue = array_sum(array_column($byCategory, 'revenue')); ?>
                         <table class="table table-striped mb-0">
                             <thead>
                                 <tr>
@@ -175,103 +144,52 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($byCategory as $cat): ?>
+                                <?php $pct = $totalRevenue > 0 ? round(($cat['revenue'] / $totalRevenue) * 100) : 0; ?>
                                 <tr>
-                                    <td>🎵 Music</td>
-                                    <td>12</td>
-                                    <td>890</td>
-                                    <td class="fw-semibold text-success">$18,400</td>
+                                    <td><?= htmlspecialchars($cat['icon'] . ' ' . $cat['name']) ?></td>
+                                    <td><?= $cat['event_count'] ?></td>
+                                    <td><?= $cat['tickets_sold'] ?></td>
+                                    <td class="fw-semibold text-success">$<?= number_format($cat['revenue'], 2) ?></td>
                                     <td>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="progress flex-grow-1" style="height:6px;">
-                                                <div class="progress-bar bg-primary" style="width:38%"></div>
+                                                <div class="progress-bar bg-primary" style="width:<?= $pct ?>%"></div>
                                             </div>
-                                            38%
+                                            <?= $pct ?>%
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>🎤 Conference</td>
-                                    <td>8</td>
-                                    <td>620</td>
-                                    <td class="fw-semibold text-success">$12,800</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="progress flex-grow-1" style="height:6px;">
-                                                <div class="progress-bar bg-success" style="width:27%"></div>
-                                            </div>
-                                            27%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>🍽️ Food & Drink</td>
-                                    <td>6</td>
-                                    <td>410</td>
-                                    <td class="fw-semibold text-success">$8,600</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="progress flex-grow-1" style="height:6px;">
-                                                <div class="progress-bar bg-warning" style="width:18%"></div>
-                                            </div>
-                                            18%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>🎨 Arts & Culture</td>
-                                    <td>5</td>
-                                    <td>280</td>
-                                    <td class="fw-semibold text-success">$5,200</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="progress flex-grow-1" style="height:6px;">
-                                                <div class="progress-bar bg-danger" style="width:11%"></div>
-                                            </div>
-                                            11%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>🏅 Sports</td>
-                                    <td>3</td>
-                                    <td>150</td>
-                                    <td class="fw-semibold text-success">$3,200</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="progress flex-grow-1" style="height:6px;">
-                                                <div class="progress-bar bg-secondary" style="width:6%"></div>
-                                            </div>
-                                            6%
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-                        <!-- PLATFORM SETTINGS -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    <i class="bi bi-gear me-2"></i>Platform Commission Settings
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-end g-3">
-                        <div class="col-md-4">
-                            <label class="form-label fw-semibold">Default Commission Rate (%)</label>
-                            <input type="number" class="form-control" value="10" min="0" max="100">
-                            <div class="text-muted mt-1" style="font-size:0.8rem;">Applied to all ticket sales platform-wide</div>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-semibold">Max Featured Events</label>
-                            <input type="number" class="form-control" value="5" min="1" max="10">
-                            <div class="text-muted mt-1" style="font-size:0.8rem;">Maximum events allowed on homepage</div>
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary w-100">
-                                <i class="bi bi-save me-1"></i> Save Settings
-                            </button>
-                        </div>
+
+            <!-- PLATFORM SETTINGS -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-gear me-2"></i>Platform Commission Settings
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="http://localhost/WebtechProject/index.php?page=admin&action=update_commission">
+                            <div class="row align-items-end g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Default Commission Rate (%)</label>
+                                    <input type="number" name="commission_rate" class="form-control" 
+                                        value="<?= $commission ?>" min="0" max="100">
+                                    <div class="text-muted mt-1" style="font-size:0.8rem;">Applied to all ticket sales platform-wide</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="bi bi-save me-1"></i> Save Settings
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -280,4 +198,4 @@
     </div>
 </div>
 
-<?php require_once '../../views/shared/footer.php'; ?>
+<?php require_once __DIR__ . '/../../views/shared/footer.php'; ?>

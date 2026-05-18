@@ -260,7 +260,7 @@ function resolveComplaint($id, $note) {
 
 function getAllAnnouncements() {
     $conn = getDB();
-    $sql = "SELECT id, title, body, sent_at FROM announcements ORDER BY sent_at DESC";
+    $sql = "SELECT id, title, body, sent_at FROM admin_announcements ORDER BY sent_at DESC";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
@@ -268,7 +268,7 @@ function getAllAnnouncements() {
 
 function postAnnouncement($title, $body) {
     $conn = getDB();
-    $stmt = $conn->prepare("INSERT INTO announcements (title, body, sent_at) VALUES (?, ?, NOW())");
+    $stmt = $conn->prepare("INSERT INTO admin_announcements (title, body, sent_at) VALUES (?, ?, NOW())");
     $stmt->bind_param("ss", $title, $body);
     return $stmt->execute();
 }
@@ -276,16 +276,16 @@ function postAnnouncement($title, $body) {
 
 function getCommissionRate() {
     $conn = getDB();
-    $sql = "SELECT value FROM platform_settings WHERE key_name = 'default_commission_pct'";
+    $sql = "SELECT setting_value FROM platform_settings WHERE setting_key = 'default_commission_pct'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    return $row ? $row['value'] : 10;
+    return $row ? $row['setting_value'] : 10;
 }
 
 
 function updateCommissionRate($rate) {
     $conn = getDB();
-    $stmt = $conn->prepare("UPDATE platform_settings SET value = ? WHERE key_name = 'default_commission_pct'");
+    $stmt = $conn->prepare("UPDATE platform_settings SET setting_value = ? WHERE setting_key = 'default_commission_pct'");
     $stmt->bind_param("d", $rate);
     return $stmt->execute();
 }

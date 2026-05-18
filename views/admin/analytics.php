@@ -1,5 +1,5 @@
 <?php $activePage = 'analytics'; ?>
-<?php require_once 'views/shared/header.php'; ?>
+<?php require_once __DIR__ . '/../../views/shared/header.php'; ?>
 <link rel="stylesheet" href="/WebtechProject/public/css/admin.css">
 
 <div class="wrapper">
@@ -251,4 +251,4 @@
     </div>
 </div>
 
-<?php require_once '../../views/shared/footer.php'; ?>
+<?php require_once __DIR__ . '/../../views/shared/footer.php'; ?>

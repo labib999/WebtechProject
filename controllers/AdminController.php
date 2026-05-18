@@ -130,6 +130,19 @@ function handleAddCategory() {
         exit;
     }
 
+    // Check if category name already exists
+    $conn = getDB();
+    $stmt = $conn->prepare("SELECT id FROM categories WHERE name = ?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $existing = $stmt->get_result()->fetch_assoc();
+
+    if ($existing) {
+        $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'A category with this name already exists.'];
+        header('Location: ' . BASE_URL . '?page=admin&action=categories');
+        exit;
+    }
+
     addCategory($name, $description, $icon);
     $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Category added successfully!'];
     header('Location: ' . BASE_URL . '?page=admin&action=categories');
@@ -453,8 +466,23 @@ switch ($action) {
     case 'update_commission':
         handleUpdateCommission();
         break;
+    case 'analytics':
+        checkAdminAuth();
+        require_once 'views/admin/analytics.php';
+        break;
+
+    case 'venue_report':
+        checkAdminAuth();
+        require_once 'views/admin/venue_report.php';
+        break;
+
+    case 'monthly_report':
+        checkAdminAuth();
+        require_once 'views/admin/monthly_report.php';
+        break;
 
     default:
         showDashboard();
         break;
-}
+    
+    }
