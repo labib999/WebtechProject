@@ -1,6 +1,6 @@
 <?php
-include("../config/db.php");
-include("../models/EventModel.php");
+include("../../config/db.php");
+include("../../models/EventModel.php");
 
 $search = "";
 
@@ -13,13 +13,4 @@ if ($search != "") {
 } else {
     $result = getPublishedEvents($conn);
 }
-
-$events = [];
-
-while ($row = $result->fetch_assoc()) {
-    $events[] = $row;
-}
-
-header("Content-Type: application/json");
-echo json_encode($events);
 ?>

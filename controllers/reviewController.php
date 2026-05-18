@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../config/db.php");
+include("../models/ReviewModel.php");
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "attendee") {
     header("Location: ../views/attendee/login.php");
@@ -23,11 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $booking_id = $parts[0];
     $event_id = $parts[1];
 
-    $sql = "insert into event_reviews (event_id, booking_id, attendee_id, rating, review_text) values (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiiis", $event_id, $booking_id, $attendee_id, $rating, $review_text);
-
-    if ($stmt->execute()) {
+    if (addReview($conn, $event_id, $booking_id, $attendee_id, $rating, $review_text)) {
         $_SESSION["success"] = "Review submitted successfully";
         header("Location: ../views/attendee/reviews.php");
         exit();

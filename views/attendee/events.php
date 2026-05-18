@@ -1,38 +1,6 @@
 <?php
 include("session_check.php");
-include("../../config/db.php");
-
-$search = "";
-
-if (isset($_GET["search"])) {
-    $search = trim($_GET["search"]);
-}
-
-if ($search != "") {
-    $sql = "select events.id, events.title, events.description, events.venue_name_override, events.event_datetime, categories.name as category_name,
-            (select min(price) from ticket_tiers where ticket_tiers.event_id = events.id) as min_price
-            from events
-            left join categories on events.category_id = categories.id
-            where events.status = 'published' and events.title like ?
-            order by events.event_datetime asc";
-
-    $stmt = $conn->prepare($sql);
-    $searchText = "%" . $search . "%";
-    $stmt->bind_param("s", $searchText);
-    $stmt->execute();
-    $result = $stmt->get_result();
-} 
-else {
-    $sql = "select events.id, events.title, events.description, events.venue_name_override, events.event_datetime, categories.name as category_name,
-            (select min(price) from ticket_tiers where ticket_tiers.event_id = events.id) as min_price
-            from events
-            left join categories on events.category_id = categories.id
-            where events.status = 'published'
-            order by events.event_datetime asc";
-
-    $result = $conn->query($sql);
-}
-
+include("../../controllers/eventListController.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,7 +26,6 @@ else {
             </div>
         </div>
     </div>
-
     <div class="content-card filter-card">
         <h2>Find Events</h2>
         <form method="get" action="events.php">
@@ -72,7 +39,6 @@ else {
             <a href="events.php" class="search-event-btn">Reset</a>
         </form>
     </div>
-
     <div class="events-page-grid" id="eventsBox">
         <?php if ($result->num_rows > 0): ?>
             <?php while ($event = $result->fetch_assoc()): ?>

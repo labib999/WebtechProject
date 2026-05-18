@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../config/db.php");
+include("../models/UserModel.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST["action"];
@@ -54,11 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $checkSql = "select id from users where email = ?";
-        $checkStmt = $conn->prepare($checkSql);
-        $checkStmt->bind_param("s", $email);
-        $checkStmt->execute();
-        $checkResult = $checkStmt->get_result();
+        $checkResult = checkEmailExists($conn, $email);
 
         if ($checkResult->num_rows > 0) {
             $_SESSION["error"] = "Email already exists";
@@ -69,11 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $role = "attendee";
 
-        $sql = "insert into users (name, email, password_hash, phone, role) values (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $name, $email, $password_hash, $phone, $role);
-
-        if ($stmt->execute()) {
+        if (registerAttendee($conn, $name, $email, $password_hash, $phone, $role)) {
             $_SESSION["success"] = "Registration successful. Please login.";
             header("Location: ../views/attendee/login.php");
             exit();
@@ -100,11 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "select * from users where email = ? and role = 'attendee' and is_active = 1";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $result = getUserByEmail($conn, $email);
 
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
@@ -114,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["name"] = $user["name"];
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["role"] = $user["role"];
-
                 header("Location: ../views/attendee/dashboard.php");
                 exit();
             } else {

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../config/db.php");
+include("../models/UserModel.php");
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "attendee") {
     header("Location: ../views/attendee/login.php");
@@ -19,11 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "update users set name = ?, email = ?, phone = ? where id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $name, $email, $phone, $user_id);
-
-    if ($stmt->execute()) {
+    if (updateUserProfile($conn, $name, $email, $phone, $user_id)) {
         $_SESSION["name"] = $name;
         $_SESSION["email"] = $email;
         $_SESSION["success"] = "Profile updated successfully";

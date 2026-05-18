@@ -1,32 +1,6 @@
 <?php
 include("session_check.php");
-include("../../config/db.php");
-
-if (!isset($_GET["code"])) {
-    header("Location: my-tickets.php");
-    exit();
-}
-
-$ticket_code = $_GET["code"];
-$attendee_id = $_SESSION["user_id"];
-
-$sql = "select bookings.*, events.title, events.event_datetime, events.venue_name_override, ticket_tiers.name as tier_name
-from bookings
-join events on bookings.event_id = events.id
-join ticket_tiers on bookings.tier_id = ticket_tiers.id
-where bookings.ticket_code = ? and bookings.attendee_id = ?";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("si", $ticket_code, $attendee_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows != 1) {
-    header("Location: my-tickets.php");
-    exit();
-}
-
-$ticket = $result->fetch_assoc();
+include("../../controllers/ticketPrintController.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,9 +17,6 @@ $ticket = $result->fetch_assoc();
             <p>View your ticket information</p>
         </div>
         <div class="topbar-right">
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search tickets...">
-            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>
@@ -55,18 +26,15 @@ $ticket = $result->fetch_assoc();
             </div>
         </div>
     </div>
-
     <div class="print-ticket-card">
         <div class="ticket-header">
             <h1>Event Platform</h1>
             <p>Official Event Ticket</p>
         </div>
-
         <div class="ticket-code-print">
             <span>Ticket Code</span>
             <h2><?php echo $ticket["ticket_code"]; ?></h2>
         </div>
-
         <div class="ticket-info-print">
             <div class="detail-row">
                 <span>Event</span>
@@ -97,16 +65,13 @@ $ticket = $result->fetch_assoc();
                 <strong>৳<?php echo $ticket["total_price"]; ?></strong>
             </div>
         </div>
-
         <p id="printMsg" class="print-msg"></p>
-
         <div class="print-actions">
             <button onclick="showPrintMessage()" class="confirm-action-btn">Print Ticket</button>
             <a href="my-tickets.php" class="outline-btn">Back to My Tickets</a>
         </div>
     </div>
 </div>
-
 <script>
 function showPrintMessage(){
     document.getElementById("printMsg").innerHTML = "Printed successfully";

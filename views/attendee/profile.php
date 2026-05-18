@@ -1,15 +1,6 @@
 <?php
 include("session_check.php");
-include("../../config/db.php");
-
-$user_id = $_SESSION["user_id"];
-
-$sql = "select * from users where id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+include("../../controllers/profilePageController.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +17,6 @@ $user = $result->fetch_assoc();
             <p>View and update your profile information</p>
         </div>
         <div class="topbar-right">
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search events...">
-            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>
@@ -38,7 +26,6 @@ $user = $result->fetch_assoc();
             </div>
         </div>
     </div>
-
     <div class="profile-grid">
         <div class="content-card profile-card">
             <img src="../../public/uploads/user.png" alt="User">
@@ -46,20 +33,16 @@ $user = $result->fetch_assoc();
             <p><?php echo $user["role"]; ?></p>
             <span>Active Account</span>
         </div>
-
         <div class="content-card">
             <h2>Profile Information</h2>
-
-            <?php if (isset($_SESSION["success"])) { ?>
+            <?php if (isset($_SESSION["success"])): ?>
                 <p class="success-msg"><?php echo $_SESSION["success"]; ?></p>
                 <?php unset($_SESSION["success"]); ?>
-            <?php } ?>
-
-            <?php if (isset($_SESSION["error"])) { ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION["error"])): ?>
                 <p class="error-msg"><?php echo $_SESSION["error"]; ?></p>
                 <?php unset($_SESSION["error"]); ?>
-            <?php } ?>
-
+            <?php endif; ?>
             <form method="post" action="../../controllers/profileController.php">
                 <div class="form-group">
                     <label>Name</label>

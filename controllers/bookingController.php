@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../config/db.php");
+include("../models/BookingModel.php");
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "attendee") {
     header("Location: ../views/attendee/login.php");
@@ -18,11 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ticket_code = "TIK-" . time() . "-" . $attendee_id;
     $status = "active";
 
-    $sql = "insert into bookings (attendee_id, event_id, tier_id, quantity, total_price, ticket_code, status) values (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiiidss", $attendee_id, $event_id, $tier_id, $quantity, $total_price, $ticket_code, $status);
-
-    if ($stmt->execute()) {
+    if (createBooking($conn, $attendee_id, $event_id, $tier_id, $quantity, $total_price, $ticket_code, $status)) {
         $_SESSION["ticket_code"] = $ticket_code;
         header("Location: ../views/attendee/confirmation.php");
         exit();

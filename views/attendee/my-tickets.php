@@ -1,28 +1,6 @@
 <?php
 include("session_check.php");
-include("../../config/db.php");
-
-$attendee_id = $_SESSION["user_id"];
-
-$sql = "select bookings.*, events.title, events.event_datetime, events.venue_name_override, ticket_tiers.name as tier_name
-from bookings
-join events on bookings.event_id = events.id
-join ticket_tiers on bookings.tier_id = ticket_tiers.id
-where bookings.attendee_id = ?
-order by bookings.id desc";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $attendee_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$totalSql = "select count(*) as total from bookings where attendee_id = ?";
-$totalStmt = $conn->prepare($totalSql);
-$totalStmt->bind_param("i", $attendee_id);
-$totalStmt->execute();
-$totalResult = $totalStmt->get_result();
-$totalData = $totalResult->fetch_assoc();
-$totalTickets = $totalData["total"];
+include("../../controllers/myTicketsController.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +26,6 @@ $totalTickets = $totalData["total"];
             </div>
         </div>
     </div>
-
     <div class="stats-grid">
         <div class="stat-card">
             <h3>Total Tickets</h3>
@@ -71,13 +48,11 @@ $totalTickets = $totalData["total"];
             <p>Tickets available</p>
         </div>
     </div>
-
     <div class="content-card">
         <div class="card-header">
             <h2>Ticket List</h2>
             <a href="events.php">Book New Ticket</a>
         </div>
-
         <?php if ($result->num_rows > 0): ?>
             <?php while ($ticket = $result->fetch_assoc()): ?>
                 <div class="ticket-card">

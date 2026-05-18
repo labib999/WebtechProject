@@ -1,46 +1,6 @@
 <?php
 include("session_check.php");
-include("../../config/db.php");
-
-if (!isset($_GET["id"])) {
-    header("Location: events.php");
-    exit();
-}
-
-$event_id = $_GET["id"];
-
-$sql = "select events.*, categories.name as category_name, users.name as organiser_name
-from events
-left join categories on events.category_id = categories.id
-left join users on events.organiser_id = users.id
-where events.id = ? and events.status = 'published'";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $event_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows != 1) {
-    header("Location: events.php");
-    exit();
-}
-
-$event = $result->fetch_assoc();
-
-$tierSql = "select * from ticket_tiers where event_id = ?";
-$tierStmt = $conn->prepare($tierSql);
-$tierStmt->bind_param("i", $event_id);
-$tierStmt->execute();
-$tierResult = $tierStmt->get_result();
-
-$reviewSql = "select event_reviews.*, users.name as attendee_name
-from event_reviews
-left join users on event_reviews.attendee_id = users.id
-where event_reviews.event_id = ?";
-$reviewStmt = $conn->prepare($reviewSql);
-$reviewStmt->bind_param("i", $event_id);
-$reviewStmt->execute();
-$reviewResult = $reviewStmt->get_result();
+include("../../controllers/eventDetailsController.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,9 +17,6 @@ $reviewResult = $reviewStmt->get_result();
             <p>View complete information about the event</p>
         </div>
         <div class="topbar-right">
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search events...">
-            </div> -->
             <div class="user-profile">
                 <img src="../../public/uploads/user.png" alt="User">
                 <div>
@@ -69,7 +26,6 @@ $reviewResult = $reviewStmt->get_result();
             </div>
         </div>
     </div>
-
     <div class="event-banner">
         <div class="banner-overlay">
             <span class="event-category"><?php echo $event["category_name"]; ?></span>
@@ -77,14 +33,12 @@ $reviewResult = $reviewStmt->get_result();
             <p><?php echo $event["description"]; ?></p>
         </div>
     </div>
-
     <div class="event-details-grid">
         <div class="event-main-info">
             <div class="content-card">
                 <h2>About Event</h2>
                 <p class="event-description"><?php echo $event["description"]; ?></p>
             </div>
-
             <div class="content-card">
                 <div class="card-header">
                     <h2>Ticket Tiers</h2>
@@ -96,41 +50,39 @@ $reviewResult = $reviewStmt->get_result();
                         <th>Seats</th>
                         <th>Action</th>
                     </tr>
-                    <?php if ($tierResult->num_rows > 0) { ?>
-                        <?php while ($tier = $tierResult->fetch_assoc()) { ?>
+                    <?php if ($tierResult->num_rows > 0): ?>
+                        <?php while ($tier = $tierResult->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo $tier["name"]; ?></td>
                                 <td>৳<?php echo $tier["price"]; ?></td>
                                 <td><?php echo $tier["total_seats"]; ?></td>
                                 <td><a href="checkout.php?event_id=<?php echo $event["id"]; ?>&tier_id=<?php echo $tier["id"]; ?>" class="table-btn">Book</a></td>
                             </tr>
-                        <?php } ?>
-                    <?php } else { ?>
+                        <?php endwhile; ?>
+                    <?php else: ?>
                         <tr>
                             <td colspan="4">No ticket tiers found</td>
                         </tr>
-                    <?php } ?>
+                    <?php endif; ?>
                 </table>
             </div>
-
             <div class="content-card">
                 <div class="card-header">
                     <h2>Recent Reviews</h2>
                 </div>
-                <?php if ($reviewResult->num_rows > 0) { ?>
-                    <?php while ($review = $reviewResult->fetch_assoc()) { ?>
+                <?php if ($reviewResult->num_rows > 0): ?>
+                    <?php while ($review = $reviewResult->fetch_assoc()): ?>
                         <div class="review-box">
                             <h4><?php echo $review["attendee_name"]; ?></h4>
                             <span><?php echo str_repeat("★", $review["rating"]); ?></span>
                             <p><?php echo $review["review_text"]; ?></p>
                         </div>
-                    <?php } ?>
-                <?php } else { ?>
+                    <?php endwhile; ?>
+                <?php else: ?>
                     <p>No reviews found for this event.</p>
-                <?php } ?>
+                <?php endif; ?>
             </div>
         </div>
-
         <div class="event-sidebar">
             <div class="content-card">
                 <h2>Event Information</h2>
@@ -151,7 +103,6 @@ $reviewResult = $reviewStmt->get_result();
                     <p><?php echo $event["organiser_name"]; ?></p>
                 </div>
             </div>
-
             <div class="content-card">
                 <h2>Quick Actions</h2>
                 <a href="events.php" class="quick-btn">Back to Events</a>
