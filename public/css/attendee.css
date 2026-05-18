@@ -1115,7 +1115,7 @@ body{
 }
 
 
-/* ----------------------------------message */
+/* message */
 .error-msg{
     background: #fee2e2;
     color: #991b1b;
@@ -1134,4 +1134,18 @@ body{
     margin-bottom: 15px;
     text-align: center;
     font-weight: bold;
+}
+
+/* remember*/
+.remember-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #374151;
+    font-size: 14px;
+}
+
+.remember-box input{
+    width: auto;
 }

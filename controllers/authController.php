@@ -103,6 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["name"] = $user["name"];
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["role"] = $user["role"];
+
+                if (isset($_POST["remember"])) {
+                    setcookie("attendee_email", $email, time() + (86400 * 30), "/");
+                } else {
+                    setcookie("attendee_email", "", time() - 3600, "/");
+                }
+
                 header("Location: ../views/attendee/dashboard.php");
                 exit();
             } else {

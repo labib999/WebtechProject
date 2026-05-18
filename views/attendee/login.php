@@ -5,6 +5,12 @@ if (isset($_SESSION["user_id"])) {
     header("Location: dashboard.php");
     exit();
 }
+
+$saved_email = "";
+
+if (isset($_COOKIE["attendee_email"])) {
+    $saved_email = $_COOKIE["attendee_email"];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,11 +38,15 @@ if (isset($_SESSION["user_id"])) {
             <input type="hidden" name="action" value="login">
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Enter your email">
+                <input type="email" name="email" value="<?php echo $saved_email; ?>" placeholder="Enter your email">
             </div>
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" placeholder="Enter your password">
+            </div>
+            <div class="remember-box">
+                <input type="checkbox" name="remember" value="yes" <?php if ($saved_email != "") { echo "checked"; } ?>>
+                <label>Remember Me</label>
             </div>
             <button type="submit" class="auth-btn">Login</button>
             <p class="auth-link">
