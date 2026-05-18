@@ -104,16 +104,12 @@
                                 </span>
                             </td>
                             <td>
-                                <form method="POST" action="http://localhost/WebtechProject/index.php?page=admin&action=toggle_featured">
-                                    <input type="hidden" name="event_id" value="<?= $event['id'] ?>">
-                                    <input type="hidden" name="is_featured" value="<?= $event['is_featured'] ? 0 : 1 ?>">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" 
-                                            <?= $event['is_featured'] ? 'checked' : '' ?>
-                                            <?= $event['status'] === 'completed' || $event['status'] === 'cancelled' ? 'disabled' : '' ?>
-                                            onchange="this.form.submit()">
-                                    </div>
-                                </form>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox"
+                                        <?= $event['is_featured'] ? 'checked' : '' ?>
+                                        <?= $event['status'] === 'completed' || $event['status'] === 'cancelled' ? 'disabled' : '' ?>
+                                        onchange="toggleFeatured(this, <?= $event['id'] ?>)">
+                                </div>
                             </td>
                             <td>
                                 <?php if ($event['status'] !== 'completed' && $event['status'] !== 'cancelled'): ?>
@@ -138,5 +134,29 @@
 
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function toggleFeatured(checkbox, eventId) {
+    var isFeatured = checkbox.checked ? 1 : 0;
+    checkbox.disabled = true;
 
+    fetch('http://localhost/WebtechProject/api/toggle_featured.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'event_id=' + eventId + '&is_featured=' + isFeatured
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) {
+            checkbox.checked = !checkbox.checked;
+            alert(data.message);
+        }
+        checkbox.disabled = false;
+    })
+    .catch(function() {
+        checkbox.checked = !checkbox.checked;
+        checkbox.disabled = false;
+    });
+}
+</script>
 <?php require_once __DIR__ . '/../../views/shared/footer.php'; ?>
