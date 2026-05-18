@@ -106,18 +106,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if (isset($_POST["remember"])) {
                     setcookie("attendee_email", $email, time() + (86400 * 30), "/");
-                } else {
+                } 
+                else {
                     setcookie("attendee_email", "", time() - 3600, "/");
                 }
 
                 header("Location: ../views/attendee/dashboard.php");
                 exit();
-            } else {
+            } 
+            else {
                 $_SESSION["error"] = "Invalid password";
                 header("Location: ../views/attendee/login.php");
                 exit();
             }
-        } else {
+        } 
+        else {
             $_SESSION["error"] = "Invalid email";
             header("Location: ../views/attendee/login.php");
             exit();
