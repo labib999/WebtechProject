@@ -63,7 +63,7 @@ function handleLogin() {
     $_SESSION['name']    = $user['name'];
 
     
-    header('Location: ../views/admin/dashboard.php');
+    header('Location: http://localhost/WebtechProject/index.php?page=admin&action=dashboard');
     exit;
 }
 

@@ -11,7 +11,7 @@ define('BASE_URL', 'http://localhost/WebtechProject/index.php');
 
 function checkAdminAuth() {
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-        header('Location: http://localhost/WebtechProject/views/shared/login.php');
+        header('Location: http://localhost/WebtechProject/index.php?page=admin&action=dashboard');
         exit;
     }
 }
